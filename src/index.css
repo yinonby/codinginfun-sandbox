@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* For react-markdown: */
+
+code {
+    background-color: #fff498;
+}
+
+blockquote {
+    background-color: #fff498;
+    color: #666;
+    margin: 0;
+    padding: 8px;
+    border-left: 0.5em #eee solid;
+    border-radius: 16px;
+}
+
+blockquote > p {
+    white-space: break-spaces;
+    margin: 0;
+}
