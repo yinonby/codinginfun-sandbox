@@ -1,3 +1,4 @@
+import TestError from "../../../../../../../infra/test/TestError";
 import { VideoGamingApp } from "./Exercise";
 
 export class Tester {
@@ -9,16 +10,18 @@ export class Tester {
   test1() {
     const videoGamingApp = new VideoGamingApp("FIFA");
 
-    if (videoGamingApp.getAppName() !== "FIFA") {
-      throw new Error(
-        "App was created with the wrong appName!"
-      );
+    if (! videoGamingApp.getAppName) {
+      throw new TestError("Missing implementation: getAppName()");
+    }
+    if (! videoGamingApp.getGameType) {
+      throw new TestError("Missing implementation: getGameType()");
     }
 
+    if (videoGamingApp.getAppName() !== "FIFA") {
+      throw new TestError("getAppName() doesn't return the app name");
+    }
     if (videoGamingApp.getGameType() !== "Video") {
-      throw new Error(
-        "App was created with the wrong gameType!"
-      );
+      throw new TestError("getGameType() doesn't return 'Video'");
     }
   }
 
