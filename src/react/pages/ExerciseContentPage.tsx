@@ -18,29 +18,29 @@ export default function ExerciseContentPage() {
   const exerciseName: string = params.exerciseName || "";
   const taskIdStr: string = params.taskId || "";
   const taskId: number = Number(taskIdStr);
-  let test: Testable | null = null;
-
-  import("../../exercises/" + progLang + "/" + courseName + "/" +
-    chapterName + "/" + lessonName + "/" + exerciseName + "/task-" +
-    taskIdStr + "/ExerciseTest")
-    .then(({ default: testClass }) => {
-      test = new testClass();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 
   const handleClick = () => {
-    if (test !== null) {
-      try {
-        setErrMessage("");
-        test.run();
-        setResult(true);
-      } catch (err) {
-        setResult(false);
-        if (err instanceof Error) {
-          setErrMessage(err.message);
-        }
+    import("../../exercises/" + progLang + "/" + courseName + "/" +
+      chapterName + "/" + lessonName + "/" + exerciseName + "/task-" +
+      taskIdStr + "/ExerciseTest")
+      .then(({ default: testClass }) => {
+        runTests(testClass);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  const runTests = (testClass: any) => {
+    let test: Testable = new testClass();
+    try {
+      setErrMessage("");
+      test.run();
+      setResult(true);
+    } catch (err) {
+      setResult(false);
+      if (err instanceof Error) {
+        setErrMessage(err.message);
       }
     }
   }
