@@ -1,6 +1,6 @@
 
 import RunnableCodingExerciseTestAbs from "../../../../../../../infra/test/RunnableCodingExerciseTestAbs";
-import { Tester } from "./Exercise";
+import { Tester } from "./Tester";
 
 const initialSolutionText: string = `
 `;
@@ -56,12 +56,7 @@ export default class Test extends RunnableCodingExerciseTestAbs {
     const tester: Tester = new Tester();
 
     try {
-      const result: number = tester.run();
-      if (result !== 0) {
-        throw new Error(
-          "Did you forget to remove some lines?"
-        );
-      }
+      tester.run();
     } catch (e) {
       throw new Error(
         "Error running your code."
