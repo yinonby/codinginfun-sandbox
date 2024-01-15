@@ -1,5 +1,5 @@
 import TestError from "../../../../../../../infra/test/TestError";
-import { FifaApp } from "./Exercise";
+import { FifaApp, NbaApp } from "./Exercise";
 
 export class Tester {
 
