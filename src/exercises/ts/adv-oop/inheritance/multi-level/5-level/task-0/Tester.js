@@ -1,58 +1,65 @@
 import TestError from "../../../../../../../infra/test/TestError";
-import { FifaApp, NbaApp } from "./Exercise";
+import { Tester as ClassicInheritanceTester } from "../../classic/task-0/Tester";
+import {
+  App,
+  FifaApp,
+  GamingApp,
+  NbaApp,
+  SportsVideoGamingApp,
+  VideoGamingApp
+} from "./Exercise";
 
-export class Tester {
+export class Tester extends ClassicInheritanceTester{
 
   run() {
-    this.test1();
-    this.test2();
+    this.testApp(App);
+    this.testGamingApp(GamingApp);
+    this.testVideoGamingApp(VideoGamingApp);
+    this.testSportsVideoGamingApp(SportsVideoGamingApp);
+    this.testFifaApp(FifaApp);
+    this.testNbaApp(NbaApp);
   }
 
-  test1() {
-    const fifaApp = new FifaApp();
+  testSportsVideoGamingApp(sportsVideoGamingAppClass) {
+    const sportsVideoGamingApp = new sportsVideoGamingAppClass();
 
-    if (! fifaApp.getAppName) {
-      throw new TestError("Missing implementation: getAppName()");
+    if (! Object.getPrototypeOf(sportsVideoGamingAppClass).name === "VideoGamingApp") {
+      throw new TestError(
+        "class VideoGamingApp should extend class GamingApp");
     }
-    if (! fifaApp.getGameType) {
-      throw new TestError("Missing implementation: getGameType()");
+    if (! sportsVideoGamingApp.getGenre) {
+      throw new TestError(
+        "Missing implementation: class VideoGamingApp, method getGenre()");
     }
-    if (! fifaApp.getGenre) {
-      throw new TestError("Missing implementation: getGenre()");
+    if (sportsVideoGamingApp.getGenre() !== "Sports") {
+      throw new TestError(
+        "class VideoGamingApp, getGenre() should return \"Sports\"");
     }
+  }
 
+  testFifaApp(fifaAppClass) {
+    const fifaApp = new fifaAppClass();
+
+    if (! Object.getPrototypeOf(fifaAppClass).name === "SportsVideoGamingApp") {
+      throw new TestError(
+        "class VideoGamingApp should extend class GamingApp");
+    }
     if (fifaApp.getAppName() !== "FIFA") {
-      throw new TestError("getAppName() should return \"FIFA\" for FifaApp");
-    }
-    if (fifaApp.getGameType() !== "Video") {
-      throw new TestError("getGameType() should return \"Video\" for FifaApp");
-    }
-    if (fifaApp.getGenre() !== "Sports") {
-      throw new TestError("getGenre() should return \"Sports\" for FifaApp");
+      throw new TestError(
+        "class FifaApp, appName should equal with \"FIFA\"");
     }
   }
 
-  test2() {
-    const nbaApp = new NbaApp();
+  testNbaApp(nbaAppClass) {
+    const nbaApp = new nbaAppClass();
 
-    if (! nbaApp.getAppName) {
-      throw new TestError("Missing implementation: getAppName()");
+    if (! Object.getPrototypeOf(nbaAppClass).name === "SportsVideoGamingApp") {
+      throw new TestError(
+        "class VideoGamingApp should extend class GamingApp");
     }
-    if (! nbaApp.getGameType) {
-      throw new TestError("Missing implementation: getGameType()");
-    }
-    if (! nbaApp.getGenre) {
-      throw new TestError("Missing implementation: getGenre()");
-    }
-
     if (nbaApp.getAppName() !== "NBA") {
-      throw new TestError("getAppName() should return \"NBA\" for NbaApp");
-    }
-    if (nbaApp.getGameType() !== "Video") {
-      throw new TestError("getGameType() should return \"Video\" for NbaApp");
-    }
-    if (nbaApp.getGenre() !== "Sports") {
-      throw new TestError("getGenre() should return \"Sports\" for NbaApp");
+      throw new TestError(
+        "class FifaApp, appName should equal with \"NBA\"");
     }
   }
 

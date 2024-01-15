@@ -11,8 +11,14 @@ class VideoGamingApp {
 class SportsVideoGamingApp {
 }
 
-export class FifaApp {
+class FifaApp {
 }
 
-export class NbaApp {
+class NbaApp {
 }
+
+/* do not remove the following lines */
+export {
+  App, FifaApp, GamingApp, NbaApp, SportsVideoGamingApp, VideoGamingApp
+};
+
