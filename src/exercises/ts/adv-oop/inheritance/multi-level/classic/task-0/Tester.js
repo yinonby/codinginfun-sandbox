@@ -27,7 +27,7 @@ export class Tester {
     }
   }
 
-  testGamingApp(GamingApp) {
+  testGamingApp() {
     const gamingApp = new GamingApp(APP_NAME_FIFA, GamingApp.GAME_TYPE_VIDEO);
 
     // verify inheritance
