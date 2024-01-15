@@ -1,5 +1,9 @@
 import TestError from "../../../../../../../infra/test/TestError";
-import { App, VideoGamingApp } from "./Exercise";
+import {
+  APP_NAME_FIFA,
+  App,
+  VideoGamingApp
+} from "./Exercise";
 
 export class Tester {
 
@@ -10,13 +14,13 @@ export class Tester {
   }
 
   testApp() {
-    const app = new App("FIFA");
+    const app = new App(APP_NAME_FIFA);
 
     if (! app.getAppName) {
       throw new TestError(
         "class App, missing implementation: method getAppName()");
     }
-    if (app.getAppName() !== "FIFA") {
+    if (app.getAppName() !== APP_NAME_FIFA) {
       throw new TestError(
         "class App, method getAppName() doesn't return the app name");
     }

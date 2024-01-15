@@ -46,7 +46,7 @@ export class Tester {
     }
     if (videoGamingApp.getGenre() !== VideoGamingApp.VIDEO_GAME_GENRE_SPORTS) {
       throw new TestError(
-        "class VideoGamingApp, getGenre() doesn't return the game type");
+        "class VideoGamingApp, getGenre() doesn't return the genre");
     }
 
     // verify correct initialization of parent appName
