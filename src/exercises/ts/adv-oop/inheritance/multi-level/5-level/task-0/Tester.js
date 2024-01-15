@@ -22,13 +22,13 @@ export class Tester {
     }
 
     if (fifaApp.getAppName() !== "FIFA") {
-      throw new TestError("getAppName() doesn't return the app name");
+      throw new TestError("getAppName() should return \"FIFA\" for FifaApp");
     }
     if (fifaApp.getGameType() !== "Video") {
-      throw new TestError("getGameType() doesn't return 'Video'");
+      throw new TestError("getGameType() should return \"Video\" for FifaApp");
     }
     if (fifaApp.getGenre() !== "Sports") {
-      throw new TestError("getGenre() doesn't return 'Video'");
+      throw new TestError("getGenre() should return \"Sports\" for FifaApp");
     }
   }
 
@@ -46,13 +46,13 @@ export class Tester {
     }
 
     if (nbaApp.getAppName() !== "NBA") {
-      throw new TestError("getAppName() doesn't return the app name");
+      throw new TestError("getAppName() should return \"NBA\" for NbaApp");
     }
     if (nbaApp.getGameType() !== "Video") {
-      throw new TestError("getGameType() doesn't return 'Video'");
+      throw new TestError("getGameType() should return \"Video\" for NbaApp");
     }
     if (nbaApp.getGenre() !== "Sports") {
-      throw new TestError("getGenre() doesn't return 'Video'");
+      throw new TestError("getGenre() should return \"Sports\" for NbaApp");
     }
   }
 
