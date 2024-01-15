@@ -25,10 +25,23 @@ export class Tester {
   testGamingApp(gamingAppClass) {
     const gamingApp = new gamingAppClass("FIFA", "Video");
 
+    // verify inheritance
     if (! Object.getPrototypeOf(gamingAppClass).name === "App") {
       throw new TestError(
         "class GamingApp should extend class App");
     }
+
+    // verify static member
+    if (! gamingAppClass.GAME_TYPE_VIDEO) {
+      throw new TestError(
+        "class GamingApp, missing static member GAME_TYPE_VIDEO");
+    }
+    if (gamingAppClass.GAME_TYPE_VIDEO !== "Video") {
+      throw new TestError(
+        "class GamingApp, static member GAME_TYPE_VIDEO initialized with the wrong value");
+    }
+
+    // verify getter method
     if (! gamingApp.getGameType) {
       throw new TestError(
         "Missing implementation: class GamingApp, method getGameType()");
@@ -42,10 +55,23 @@ export class Tester {
   testVideoGamingApp(videoGamingAppClass) {
     const videoGamingApp = new videoGamingAppClass("FIFA");
 
+    // verify static member
+    if (! videoGamingAppClass.VIDEO_GAME_GENRE_SPORTS) {
+      throw new TestError(
+        "class GamingApp, missing static member VIDEO_GAME_GENRE_SPORTS");
+    }
+    if (videoGamingAppClass.VIDEO_GAME_GENRE_SPORTS !== "Sports") {
+      throw new TestError(
+        "class GamingApp, static member VIDEO_GAME_GENRE_SPORTS initialized with the wrong value");
+    }
+
+    // verify inheritance
     if (! Object.getPrototypeOf(videoGamingAppClass).name === "GamingApp") {
       throw new TestError(
         "class VideoGamingApp should extend class GamingApp");
     }
+
+    // verify correct game type
     if (videoGamingApp.getGameType() !== "Video") {
       throw new TestError(
         "class GamingApp, getGameType() should return \"Video\"");
