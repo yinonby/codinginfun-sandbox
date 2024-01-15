@@ -1,4 +1,7 @@
 
+const APP_NAME_FIFA: string = "FIFA";
+const APP_NAME_NBA: string = "NBA";
+
 class App {
   constructor(private appName: string) {
   }
@@ -41,8 +44,9 @@ class FifaApp {
 class NbaApp {
 }
 
-/* do not remove the following lines */
+/* do not change anything below this line */
 export {
+  APP_NAME_FIFA, APP_NAME_NBA,
   App, FifaApp, GamingApp, NbaApp, SportsVideoGamingApp, VideoGamingApp
 };
 

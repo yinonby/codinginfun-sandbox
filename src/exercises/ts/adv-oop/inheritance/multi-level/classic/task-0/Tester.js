@@ -1,20 +1,20 @@
 import TestError from "../../../../../../../infra/test/TestError";
-import { App, GamingApp, VideoGamingApp } from "./Exercise";
+import { App, VideoGamingApp } from "./Exercise";
 
 export class Tester {
 
   run() {
-    this.testApp(App);
-    this.testGamingApp(GamingApp);
-    this.testVideoGamingApp(VideoGamingApp);
+    this.testApp();
+    this.testGamingApp();
+    this.testVideoGamingApp();
   }
 
-  testApp(appClass) {
-    const app = new appClass("FIFA");
+  testApp() {
+    const app = new App("FIFA");
 
     if (! app.getAppName) {
       throw new TestError(
-        "Missing implementation: class App, method getAppName()");
+        "class App, missing implementation: method getAppName()");
     }
     if (app.getAppName() !== "FIFA") {
       throw new TestError(
@@ -22,21 +22,21 @@ export class Tester {
     }
   }
 
-  testGamingApp(gamingAppClass) {
-    const gamingApp = new gamingAppClass("FIFA", "Video");
+  testGamingApp(GamingApp) {
+    const gamingApp = new GamingApp(APP_NAME_FIFA, GamingApp.GAME_TYPE_VIDEO);
 
     // verify inheritance
-    if (! Object.getPrototypeOf(gamingAppClass).name === "App") {
+    if (! Object.getPrototypeOf(GamingApp).name === "App") {
       throw new TestError(
         "class GamingApp should extend class App");
     }
 
     // verify static member
-    if (! gamingAppClass.GAME_TYPE_VIDEO) {
+    if (! GamingApp.GAME_TYPE_VIDEO) {
       throw new TestError(
         "class GamingApp, missing static member GAME_TYPE_VIDEO");
     }
-    if (gamingAppClass.GAME_TYPE_VIDEO !== "Video") {
+    if (GamingApp.GAME_TYPE_VIDEO !== "Video") {
       throw new TestError(
         "class GamingApp, static member GAME_TYPE_VIDEO initialized with the wrong value");
     }
@@ -44,37 +44,39 @@ export class Tester {
     // verify getter method
     if (! gamingApp.getGameType) {
       throw new TestError(
-        "Missing implementation: class GamingApp, method getGameType()");
+        "class GamingApp, missing implementation: method getGameType()");
     }
     if (gamingApp.getGameType() !== "Video") {
       throw new TestError(
         "class GamingApp, getGameType() doesn't return the game type");
     }
+
+    // verify correct initialization of parent appName
+    if (gamingApp.getAppName() !== APP_NAME_FIFA) {
+      throw new TestError(
+        "class GamingApp, appName should equal with \"FIFA\"");
+    }
   }
 
-  testVideoGamingApp(videoGamingAppClass) {
-    const videoGamingApp = new videoGamingAppClass("FIFA");
-
-    // verify static member
-    if (! videoGamingAppClass.VIDEO_GAME_GENRE_SPORTS) {
-      throw new TestError(
-        "class GamingApp, missing static member VIDEO_GAME_GENRE_SPORTS");
-    }
-    if (videoGamingAppClass.VIDEO_GAME_GENRE_SPORTS !== "Sports") {
-      throw new TestError(
-        "class GamingApp, static member VIDEO_GAME_GENRE_SPORTS initialized with the wrong value");
-    }
+  testVideoGamingApp() {
+    const videoGamingApp = new VideoGamingApp(APP_NAME_FIFA);
 
     // verify inheritance
-    if (! Object.getPrototypeOf(videoGamingAppClass).name === "GamingApp") {
+    if (! Object.getPrototypeOf(VideoGamingApp).name === "GamingApp") {
       throw new TestError(
         "class VideoGamingApp should extend class GamingApp");
     }
 
-    // verify correct game type
-    if (videoGamingApp.getGameType() !== "Video") {
+    // verify correct initialization of parent appName
+    if (videoGamingApp.getAppName() !== APP_NAME_FIFA) {
       throw new TestError(
-        "class GamingApp, getGameType() should return \"Video\"");
+        "class VideoGamingApp, appName should equal with \"FIFA\"");
+    }
+
+    // verify correct initialization of parent gameType
+    if (videoGamingApp.getGameType() !== GamingApp.GAME_TYPE_VIDEO) {
+      throw new TestError(
+        "class VideoGamingApp, should initialize parent using GamingApp.GAME_TYPE_VIDEO for gameType");
     }
   }
 
