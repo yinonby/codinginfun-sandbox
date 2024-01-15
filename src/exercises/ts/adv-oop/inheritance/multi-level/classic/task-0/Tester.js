@@ -2,6 +2,7 @@ import TestError from "../../../../../../../infra/test/TestError";
 import {
   APP_NAME_FIFA,
   App,
+  GamingApp,
   VideoGamingApp
 } from "./Exercise";
 
