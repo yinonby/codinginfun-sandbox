@@ -11,7 +11,8 @@ export class Tester {
 
   run() {
     this.testCoffeeMaker();
-    this.nespressoCoffeeMaker();
+    this.thisNespressoCoffeeMaker();
+    this.testDelonghiCoffeeMaker();
   }
 
   testCoffeeMaker() {
