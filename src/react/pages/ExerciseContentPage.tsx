@@ -18,7 +18,7 @@ export default function ExerciseContentPage() {
 
   const handleClick = () => {
     import("../../exercises/" + progLang + "/" + courseName + "/" +
-      chapterName + "/" + lessonName + "/" + exerciseName +
+      chapterName + "/" + lessonName + "/" + exerciseName + "/" + 
       sandboxIdStr + "/ExerciseTest")
       .then(({ default: testClass }) => {
         runTests(testClass);
