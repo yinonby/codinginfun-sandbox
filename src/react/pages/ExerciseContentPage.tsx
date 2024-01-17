@@ -1,6 +1,4 @@
 
-import RunnableCodingExerciseTestAbs from '#infra/test/RunnableCodingExerciseTestAbs';
-import TestError from '#infra/test/TestError';
 import Testable from '#infra/test/Testable';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -16,13 +14,12 @@ export default function ExerciseContentPage() {
   const chapterName: string = params.chapterName || "";
   const lessonName: string = params.lessonName || "";
   const exerciseName: string = params.exerciseName || "";
-  const taskIdStr: string = params.taskId || "";
-  const taskId: number = Number(taskIdStr);
+  const sandboxIdStr: string = params.sandboxId || "";
 
   const handleClick = () => {
     import("../../exercises/" + progLang + "/" + courseName + "/" +
-      chapterName + "/" + lessonName + "/" + exerciseName + "/task-" +
-      taskIdStr + "/ExerciseTest")
+      chapterName + "/" + lessonName + "/" + exerciseName +
+      sandboxIdStr + "/ExerciseTest")
       .then(({ default: testClass }) => {
         runTests(testClass);
       })
