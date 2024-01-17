@@ -8,12 +8,12 @@ abstract class CoffeeMaker {
 class NespressoCoffeeMaker extends CoffeeMaker {
 }
 
-class DelonghiCoffeeMaker extends CoffeeMaker {
+class DeLonghiCoffeeMaker extends CoffeeMaker {
 }
 
 /* do not change anything below this line */
 export {
   COFFEE_DELONGHI, COFFEE_NESPRESSO,
-  CoffeeMaker, DelonghiCoffeeMaker, NespressoCoffeeMaker
+  CoffeeMaker, DeLonghiCoffeeMaker, NespressoCoffeeMaker
 };
 

@@ -3,7 +3,6 @@ import TestError from "../../../../../../../infra/test/TestError";
 import {
   COFFEE_DELONGHI,
   COFFEE_NESPRESSO,
-  DelonghiCoffeeMaker,
   NespressoCoffeeMaker
 } from "./Exercise";
 
@@ -12,7 +11,7 @@ export class Tester {
   run() {
     this.testCoffeeMaker();
     this.testNespressoCoffeeMaker();
-    this.testDelonghiCoffeeMaker();
+    this.testDeLonghiCoffeeMaker();
   }
 
   testCoffeeMaker() {
@@ -36,18 +35,18 @@ export class Tester {
     }
   }
 
-  testDelonghiCoffeeMaker() {
+  testDeLonghiCoffeeMaker() {
     // test non-abstract
-    const delonghiCoffeeMaker = new DelonghiCoffeeMaker();
+    const deLonghiCoffeeMaker = new DeLonghiCoffeeMaker();
 
     // test getCoffee
-    if (! DelonghiCoffeeMaker.prototype.hasOwnProperty("getCoffee")) {
+    if (! DeLonghiCoffeeMaker.prototype.hasOwnProperty("getCoffee")) {
       throw new TestError(
-        "DelonghiCoffeeMaker must implement getCoffee()");
+        "DeLonghiCoffeeMaker must implement getCoffee()");
     }
-    if (delonghiCoffeeMaker.getCoffee() !== COFFEE_DELONGHI) {
+    if (deLonghiCoffeeMaker.getCoffee() !== COFFEE_DELONGHI) {
       throw new TestError(
-        "DelonghiCoffeeMaker.getCoffee() should return \"" +
+        "DeLonghiCoffeeMaker.getCoffee() should return \"" +
         COFFEE_DELONGHI + "\"");
     }
   }
