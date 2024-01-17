@@ -1,35 +1,23 @@
 
+import TestError from "../../../../../../../infra/test/TestError";
 import {
   COFFEE_DELONGHI,
   COFFEE_NESPRESSO,
-  CoffeeMaker,
   DelonghiCoffeeMaker,
-  NespressoCoffeeMaker,
+  NespressoCoffeeMaker
 } from "./Exercise";
 
 export class Tester {
 
   run() {
     this.testCoffeeMaker();
-    this.thisNespressoCoffeeMaker();
+    this.testNespressoCoffeeMaker();
     this.testDelonghiCoffeeMaker();
   }
 
   testCoffeeMaker() {
-    let isErr = false;
-
-    // test abstract
-    try {
-      const coffeeMaker = new CoffeeMaker();
-    } catch (e) {
-      isErr = true;
-    }
-    if (! isErr) {
-      throw new TestError(
-        "class CoffeeMaker should be abstract");
-    }
-
-    // test abstract method ?
+    // find way to test if class is abstract
+    // find way to test if abstract class has declared abstract method
   }
 
   testNespressoCoffeeMaker() {
@@ -37,7 +25,7 @@ export class Tester {
     const nespressoCoffeeMaker = new NespressoCoffeeMaker();
 
     // test getCoffee
-    if (! NespressoCoffeeMaker.prototype.getCoffee) {
+    if (! NespressoCoffeeMaker.prototype.hasOwnProperty("getCoffee")) {
       throw new TestError(
         "NespressoCoffeeMaker must implement getCoffee()");
     }
@@ -53,7 +41,7 @@ export class Tester {
     const delonghiCoffeeMaker = new DelonghiCoffeeMaker();
 
     // test getCoffee
-    if (! DelonghiCoffeeMaker.prototype.getCoffee) {
+    if (! DelonghiCoffeeMaker.prototype.hasOwnProperty("getCoffee")) {
       throw new TestError(
         "DelonghiCoffeeMaker must implement getCoffee()");
     }

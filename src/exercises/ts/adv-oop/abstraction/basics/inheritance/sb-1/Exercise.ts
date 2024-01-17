@@ -12,8 +12,8 @@ class DelonghiCoffeeMaker extends CoffeeMaker {
 }
 
 /* do not change anything below this line */
-export default {
+export {
   COFFEE_DELONGHI, COFFEE_NESPRESSO,
-  CoffeeMaker, NespressoCoffeeMaker, DelonghiCoffeeMaker,
+  CoffeeMaker, DelonghiCoffeeMaker, NespressoCoffeeMaker
 };
 
