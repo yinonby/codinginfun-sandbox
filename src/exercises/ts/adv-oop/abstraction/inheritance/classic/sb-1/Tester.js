@@ -3,7 +3,8 @@ import TestError from "../../../../../../../infra/test/TestError";
 import {
   COFFEE_DELONGHI,
   COFFEE_NESPRESSO,
-  NespressoCoffeeMaker
+  DeLonghiCoffeeMaker,
+  NespressoCoffeeMaker,
 } from "./Exercise";
 
 export class Tester {
