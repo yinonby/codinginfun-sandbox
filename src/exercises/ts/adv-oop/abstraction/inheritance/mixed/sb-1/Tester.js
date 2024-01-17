@@ -12,7 +12,7 @@ export class Tester {
 
   run() {
     this.testCoffeeMaker();
-    this.FilterCoffeeMaker();
+    this.testFilterCoffeeMaker();
     this.testMelittaFilterCoffeeMaker();
     this.testRusselHobbsFilterCoffeeMaker();
   }
@@ -24,6 +24,8 @@ export class Tester {
 
   testFilterCoffeeMaker() {
     const melittaFilterCoffeeMaker = new MelittaFilterCoffeeMaker();
+
+    // find way to test if class is abstract
 
     // test getCoffeeType
     if (! FilterCoffeeMaker.prototype.hasOwnProperty("getCoffeeType")) {
