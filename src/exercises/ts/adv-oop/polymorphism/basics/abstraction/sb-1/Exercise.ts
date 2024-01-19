@@ -70,10 +70,17 @@ const SMITH_FAMILY_CREDIT_CARD = new CreditCard("1111 1111 1111 1111");
 const HUNTER_FAMILY_CREDIT_CARD = new CreditCard("2222 2222 2222 2222");
 const comicCon: ComicCon = new ComicCon();
 
-// register a new 'SpidermanFan' to the Comic-Con, named "Lisa Smith"
+// register a new 'SpidermanFan' to the Comic-Con, named "Lisa Smith",
+// using the Smith family credit card
+
 // register a new 'SupermanFan' to the Comic-Con, named "Bob Smith"
+// using the Smith family credit card
+
 // register a new 'BatmanFan' to the Comic-Con, named "Monica Hunter"
+// using the Hunter family credit card
+
 // register a new 'SupermanFan' to the Comic-Con, named "Rob Hunter"
+// using the Hunter family credit card
 
 /* do not change anything below this line */
 export { comicCon };

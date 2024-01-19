@@ -50,7 +50,6 @@ class ComicCon {
 
   public register(participant: ComicFan, creditCard: CreditCard): void {
     // charge the participant
-
     // This is the key point of this exercise: the method 'charge()' accepts
     // a parameter of type 'Person'. We pass the variable 'participant', which
     // is of type 'ComicFan', which whill then take its form as a
