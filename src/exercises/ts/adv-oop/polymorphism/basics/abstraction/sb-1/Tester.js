@@ -11,6 +11,10 @@ export class Tester {
   }
 
   testParticipants() {
+    if (! comicCon.prototype.hasOwnProperty("getParticipants")) {
+      throw new TestError(
+        "ComicCon must implement getParticipants()");
+    }
     const participants = comicCon.getParticipants();
 
     if (participants.length !== 4) {
