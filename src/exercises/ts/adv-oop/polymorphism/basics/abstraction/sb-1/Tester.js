@@ -1,5 +1,5 @@
 
-//import TestError from "../../../../../../../infra/test/TestError";
+import TestError from "../../../../../../../infra/test/TestError";
 import {
   comicCon,
 } from "./Exercise";
@@ -13,6 +13,10 @@ export class Tester {
   testParticipants() {
     const participants = comicCon.getParticipants();
 
+    if (participants.length !== 4) {
+      throw new TestError("Incorrect number of participants, expected 4");
+    }
+
     this.testParticipant(participants[0], "Lisa", "Smith", "Spiderman");
     this.testParticipant(participants[1], "Bob", "Smith", "Superman");
     this.testParticipant(participants[2], "Monica", "Hunter", "Batman");
@@ -22,11 +26,11 @@ export class Tester {
   testParticipant(participant, firstName, lastName, favoriteComicBook) {
     const expectedFullName = firstName + " " + lastName;
     if (participant.getFullName() !== expectedFullName) {
-      throw TestError("Incorrect full name, expected: " + expectedFullName);
+      throw new TestError("Incorrect full name, expected: " + expectedFullName);
     }
 
     if (participant.getFavoriteComicBook() !== favoriteComicBook) {
-      throw TestError("Incorrect book, expected: " + favoriteComicBook);
+      throw new TestError("Incorrect book, expected: " + favoriteComicBook);
     }
   }
 }
