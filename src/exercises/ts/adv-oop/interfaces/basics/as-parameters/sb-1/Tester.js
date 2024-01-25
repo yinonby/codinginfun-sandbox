@@ -10,6 +10,7 @@ import {
 } from "./Exercise";
 
 export class Tester {
+  testSpotifyNextCnt = 1;
 
   run() {
     this.testSong();
@@ -56,8 +57,10 @@ export class Tester {
 
   testSpotifyNext(expectedAudio) {
     if (expectedAudio !== spotify.playNext()) {
-      throw new TestError("Incorrect next audio, expected: " + expectedAudio);
+      throw new TestError("Incorrect audio #" + this.testSpotifyNextCnt +
+        ", expected: " + expectedAudio);
     }
+    this.testSpotifyNextCnt++;
   }
 
 }

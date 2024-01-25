@@ -35,7 +35,9 @@ class Spotify {
   // and a return-type string.
   // every time this method is called, it should play the next Audible in
   // the playlist. for every 6 audibles, the method will play an
-  // announcement instead
+  // announcement instead.
+  // the first audio should be an announcement, then 6 audibles from the
+  // playlist, then another announcement, and so on.
 
 }
 
