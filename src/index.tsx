@@ -7,12 +7,17 @@ import {
 } from "react-router-dom";
 import './index.css';
 import ExerciseContentPage from "./react/pages/ExerciseContentPage";
+import ModularExerciseContentPage from './react/pages/ModularExerciseContentPage';
 
 const appStyle = {
   fontFamily: "sans-serif",
 };
 
 const router = createBrowserRouter([
+  {
+    path: "/o/codesandbox/modular/:progLang/:exerciseName",
+    element: <ModularExerciseContentPage />,
+  },
   {
     path: "/o/codesandbox/:progLang/:courseName/:chapterName/:lessonName/:exerciseName/:sandboxId",
     element: <ExerciseContentPage />,
