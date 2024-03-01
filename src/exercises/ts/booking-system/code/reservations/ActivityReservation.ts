@@ -5,7 +5,7 @@ export default class ActivityReservation extends FixedDateReservation {
     private activityName: string, private activityDate: string,
     private activityRate: number, private currencyCode: string) {
 
-    super(reservationId, clientEmail);
+    super(reservationId, clientEmail, activityDate);
   }
 
   public getFixedDate(): string {

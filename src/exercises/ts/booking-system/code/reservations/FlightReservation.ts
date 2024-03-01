@@ -4,20 +4,17 @@ export default class FlightReservation extends FixedDateReservation {
   constructor(reservationId: string, clientEmail: string,
     private flightDate: string,
     private originAirportCode: string, private destinationAirportCode: string,
-    private flightRate: number, private currencyCode: string) {
+    private flightSegmentRate: number, private currencyCode: string) {
 
-    super(reservationId, clientEmail);
+    super(reservationId, clientEmail, flightDate);
   }
 
   public getFixedDate(): string {
-    // in a real flight reservation, where more than a single flight
-    // segment can be found, we would go over the flight segments,
-    // and return the date of the first flight in the sequence
     return this.flightDate;
   }
 
   public getRate(): number {
-    return this.flightRate;
+    return this.flightSegmentRate;
   }
 
   public getCurrencyCode(): string {
