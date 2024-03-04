@@ -1,6 +1,6 @@
 import Order from "./orders/Order";
-import PaymentManagementProvider from "./payments/managers/PaymentManagementProvider";
 import { PaymentMethod } from "./payments/PaymentMethod";
+import PaymentProcessingProvider from "./payments/PaymentProcessingProvider";
 import GiftCard from "./products/GiftCard";
 import ActivityReservation from "./reservations/ActivityReservation";
 import FlightReservation from "./reservations/FlightReservation";
@@ -11,7 +11,7 @@ export default class BookingSystem {
   private reservations: Reservation[] = [];
   private orders: Order[] = [];
 
-  constructor(private paymentManagementProvider: PaymentManagementProvider) {}
+  constructor(private PaymentProcessingProvider: PaymentProcessingProvider) {}
 
   // API methods
 
@@ -102,7 +102,7 @@ export default class BookingSystem {
     const reservation: Reservation = this.reservations[reservationIdx];
 
     // if paid, refund payment
-    if (! this.paymentManagementProvider.cancelPayment(
+    if (! this.PaymentProcessingProvider.cancelPayment(
       reservation.getPaymentId())) {
       // if cannot refund, exit and return false
       console.log("refund failed: " + reservationId);
@@ -119,7 +119,7 @@ export default class BookingSystem {
   private addReservation(reservation: Reservation,
     paymentMethod: PaymentMethod): boolean {
     // charge
-    const paymentId: string = this.paymentManagementProvider.makePayment(
+    const paymentId: string = this.PaymentProcessingProvider.makePayment(
       reservation, paymentMethod);
     if (! paymentId) {
       // if charge is not successful
@@ -133,7 +133,7 @@ export default class BookingSystem {
 
   private addOrder(order: Order, paymentMethod: PaymentMethod): boolean {
     // charge
-    if (this.paymentManagementProvider.makePayment(order, paymentMethod)) {
+    if (this.PaymentProcessingProvider.makePayment(order, paymentMethod)) {
       // if charge is successful
       this.orders.push(order);
       return true;

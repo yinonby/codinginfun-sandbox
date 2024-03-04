@@ -1,8 +1,8 @@
 import BookingSystem from "./BookingSystem";
 import { BankAccount, CreditCard } from "./payments/PaymentMethod";
+import PaymentProcessingProvider from "./payments/PaymentProcessingProvider";
 import ExternalPaymentAdapter from "./payments/adapters/ExternalPaymentAdapter";
 import StripeAPI from "./payments/adapters/stripe/StripeAPI";
-import PaymentManagementProvider from "./payments/managers/PaymentManagementProvider";
 import PaymentManager from "./payments/managers/PaymentManager";
 
 // note that if we want to change the external payment provider (i.e. Stripe),
@@ -11,7 +11,7 @@ import PaymentManager from "./payments/managers/PaymentManager";
 const externalPaymentAdapter: ExternalPaymentAdapter =
   new StripeAPI();
 
-const paymentProvider: PaymentManagementProvider =
+const paymentProvider: PaymentProcessingProvider =
   new PaymentManager(externalPaymentAdapter);
 const bookingSystem: BookingSystem = new BookingSystem(paymentProvider);
 

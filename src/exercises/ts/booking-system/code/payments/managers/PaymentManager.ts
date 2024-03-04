@@ -1,9 +1,9 @@
 import Payable from "../Payable";
 import { PaymentMethod } from "../PaymentMethod";
+import PaymentProcessingProvider from "../PaymentProcessingProvider";
 import ExternalPaymentAdapter from "../adapters/ExternalPaymentAdapter";
-import PaymentManagementProvider from "./PaymentManagementProvider";
 
-export default class PaymentManager implements PaymentManagementProvider {
+export default class PaymentManager implements PaymentProcessingProvider {
   constructor(private externalPaymentAdapter: ExternalPaymentAdapter) {}
 
   // this method sends a charge command to the external payment provider
