@@ -22,8 +22,9 @@ export default function ModularExerciseContentPage() {
       });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const runTests = (testClass: any) => {
-    let test: Testable = new testClass();
+    const test: Testable = new testClass();
     try {
       setErrMessage("");
       test.run();

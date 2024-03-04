@@ -4,6 +4,7 @@ class CreditCard {
 }
 
 class PaymentSystem {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public charge(creditCard: CreditCard, person: Person): void {
     console.log("Sending payment request");
   }

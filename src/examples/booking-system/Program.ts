@@ -29,10 +29,10 @@ const bankAccount: BankAccount = {
   ibanNumber: "ES11000011110000111111",
   bankSwiftCode: "BBBAAAXXX",
 }
-const reservationId2: string = bookingSystem.addHotelReservation(
+bookingSystem.addHotelReservation(
   "client-2@yahoo.com", "Carlton NYC", "2022-11-02", "2022-11-05",
   130, "USD", bankAccount);
-const order1: string = bookingSystem.addGiftCardPurchase(
+bookingSystem.addGiftCardPurchase(
   "client-2@yahoo.com",
   100, "USD", bankAccount);
 

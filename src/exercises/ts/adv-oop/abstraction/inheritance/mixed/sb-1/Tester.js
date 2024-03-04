@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 
 import TestError from "../../../../../../../infra/test/TestError";
 import {

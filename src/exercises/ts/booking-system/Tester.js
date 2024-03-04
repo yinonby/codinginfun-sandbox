@@ -4,6 +4,7 @@
 export class Tester {
 
   run() {
+    console.log("running tests");
   }
 
 }

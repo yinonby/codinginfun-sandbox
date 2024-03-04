@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 class CreditCard {
   constructor(private cardNumber: string) {}

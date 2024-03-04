@@ -1,4 +1,3 @@
-
 import Testable from '#infra/test/Testable';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -28,8 +27,9 @@ export default function ExerciseContentPage() {
       });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const runTests = (testClass: any) => {
-    let test: Testable = new testClass();
+    const test: Testable = new testClass();
     try {
       setErrMessage("");
       test.run();
