@@ -1,12 +1,12 @@
 import StripeMock from "../../../external-api-mocks/stripe/StripeMock";
 import Payable from "../../Payable";
 import { PaymentMethod } from "../../PaymentMethod";
-import ExternalPaymentAdapter from "../ExternalPaymentAdapter";
+import ExternalPaymentProcessingAdapter from "../ExternalPaymentProcessingAdapter";
 
 // in a real environment, this class would be sending requests
 // to the Stripe servers; for this example, we use StripeMock - a class
 // that simulates a Stripe environment
-export default class StripeAPI implements ExternalPaymentAdapter {
+export default class StripeAPI implements ExternalPaymentProcessingAdapter {
   private stripeMock: StripeMock = new StripeMock();
 
   // this method sends a charge command to the external payment provider

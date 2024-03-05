@@ -1,18 +1,18 @@
 import Payable from "../Payable";
 import { PaymentMethod } from "../PaymentMethod";
-import PaymentProcessingProvider from "../PaymentProcessingProvider";
-import ExternalPaymentAdapter from "../adapters/ExternalPaymentAdapter";
+import PaymentOperationsProvider from "../PaymentOperationsProvider";
+import ExternalPaymentProcessingAdapter from "../adapters/ExternalPaymentProcessingAdapter";
 
-export default class PaymentManager implements PaymentProcessingProvider {
-  constructor(private externalPaymentAdapter: ExternalPaymentAdapter) {}
+export default class PaymentManager implements PaymentOperationsProvider {
+  constructor(private ExternalPaymentProcessingAdapter: ExternalPaymentProcessingAdapter) {}
 
   // this method sends a charge command to the external payment provider
   public makePayment(payable: Payable, paymentMethod: PaymentMethod): string {
-    return this.externalPaymentAdapter.charge(payable, paymentMethod);
+    return this.ExternalPaymentProcessingAdapter.charge(payable, paymentMethod);
   }
 
   // this method sends a refund command to the external payment provider
   public cancelPayment(paymentId: string): boolean {
-    return this.externalPaymentAdapter.refund(paymentId);
+    return this.ExternalPaymentProcessingAdapter.refund(paymentId);
   }
 }
