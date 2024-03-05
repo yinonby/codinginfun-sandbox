@@ -5,8 +5,22 @@ import Product from "../products/Product";
 export default class Order {
   private paymentId: string = "";
 
-  constructor(private orderId: string,
-    private clientEmail: string, private product: Product) {
+  constructor(
+    private readonly orderId: string,
+    private readonly clientEmail: string,
+    private readonly products: Product[]) {
+
+    // make sure there is at least 1 product
+    if (! products.length) {
+      throw new Error("Must provide at least 1 product");
+    }
+
+    // make sure all currencies match
+    for (let i = 1; i < products.length; i++) {
+      if (products[0].getCurrencyCode() !== products[i].getCurrencyCode()) {
+        throw new Error("All currencies must match");
+      }
+    }
   }
 
   public getOrderId(): string {
@@ -18,11 +32,15 @@ export default class Order {
   }
 
   public getRate(): number {
-    return this.product.getRate();
+    let totalRate: number = 0;
+    for (const product of this.products) {
+      totalRate += product.getRate();
+    }
+    return totalRate;
   }
 
   public getCurrencyCode(): string {
-    return this.product.getCurrencyCode();
+    return this.products[0].getCurrencyCode();
   }
 
   public getPaymentId(): string {
@@ -32,4 +50,5 @@ export default class Order {
   public setPaymentId(paymentId: string): void {
     this.paymentId = paymentId;
   }
+
 }

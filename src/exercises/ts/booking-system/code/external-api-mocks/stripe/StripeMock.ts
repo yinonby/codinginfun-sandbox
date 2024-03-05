@@ -1,9 +1,9 @@
-import { StripePaymentMethod } from "./StripePaymentMethod";
+import { StripeCreditCard } from "./StripeCreditCard";
 
 type StripePaymentRecord = {
   rate: number,
   currencyCode: string,
-  stripePaymentMethod: StripePaymentMethod,
+  stripeCreditCard: StripeCreditCard,
 }
 
 export default class StripeMock {
@@ -13,12 +13,12 @@ export default class StripeMock {
   // the method 'charge()' charges the given payment method with
   // the given rate in the given currency, and returns a unique payment-id
   public charge(rate: number, currencyCode: string,
-    stripePaymentMethod: StripePaymentMethod): string {
+    stripeCreditCard: StripeCreditCard): string {
     const paymentId: string = generateUniqueId();
     const stripePaymentRecord: StripePaymentRecord = {
       rate: rate,
       currencyCode: currencyCode,
-      stripePaymentMethod: stripePaymentMethod,
+      stripeCreditCard: stripeCreditCard,
     }
 
     // here the system should charge the payment method

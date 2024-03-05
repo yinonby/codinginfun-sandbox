@@ -1,11 +1,15 @@
 import FixedDateReservation from "./FixedDateReservation";
 
 export default class ActivityReservation extends FixedDateReservation {
-  constructor(reservationId: string, clientEmail: string,
-    private activityName: string, private activityDate: string,
-    private activityRate: number, private currencyCode: string) {
+  constructor(
+    reservationId: string,
+    clientEmail: string,
+    private readonly activityName: string,
+    private readonly activityDate: string,
+    private readonly activityRate: number,
+    private readonly currencyCode: string) {
 
-    super(reservationId, clientEmail, activityDate);
+    super(reservationId, clientEmail);
   }
 
   public getFixedDate(): string {
