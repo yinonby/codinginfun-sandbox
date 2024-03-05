@@ -1,4 +1,3 @@
-import GiftCard from "../products/Book";
 import Product from "../products/Product";
 
 // an order can usually consist of one or more products; however,
@@ -36,15 +35,4 @@ export default class Order {
     this.paymentId = paymentId;
   }
 
-  // API methods
-
-  public isGiftCardMatch(giftCardId: string): boolean {
-    return this.product instanceof GiftCard &&
-      this.product.getCardId() === giftCardId;
-  }
-
-  public getGiftCard(giftCardId: string): GiftCard | null {
-    return this.product instanceof GiftCard &&
-      this.product.getCardId() === giftCardId ? this.product : null;
-  }
 }
