@@ -78,15 +78,14 @@ export default class BookingSystem {
     paymentMethod: PaymentMethod): string {
     
     // create gift-card object
-    const giftCardId: string = generateUniqueId();
     const book: Book = new Book(bookName, bookPrice, currencyCode);
 
     // create order object
     const orderId: string = generateUniqueId();
-    const order: Order = new Order(orderId, clientEmail, book);
+    const order: Order = new Order(orderId, clientEmail, [book]);
     
     if (this.addOrder(order, paymentMethod)) {
-      return giftCardId;
+      return orderId;
     } else {
       return "";
     }
