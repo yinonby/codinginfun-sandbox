@@ -1,10 +1,14 @@
 import FixedDateReservation from "./FixedDateReservation";
 
 export default class FlightReservation extends FixedDateReservation {
-  constructor(reservationId: string, clientEmail: string,
-    private flightDate: string,
-    private originAirportCode: string, private destinationAirportCode: string,
-    private flightRate: number, private currencyCode: string) {
+  constructor(
+    reservationId: string,
+    clientEmail: string,
+    private readonly flightDate: string,
+    private readonly originAirportCode: string,
+    private readonly destinationAirportCode: string,
+    private readonly flightRate: number,
+    private readonly currencyCode: string) {
 
     super(reservationId, clientEmail);
   }

@@ -1,3 +1,4 @@
+import GiftCard from "../products/Book";
 import Product from "../products/Product";
 
 // an order can usually consist of one or more products; however,
@@ -5,8 +6,10 @@ import Product from "../products/Product";
 export default class Order {
   private paymentId: string = "";
 
-  constructor(private orderId: string,
-    private clientEmail: string, private product: Product) {
+  constructor(
+    private readonly orderId: string,
+    private readonly clientEmail: string,
+    private readonly product: Product) {
   }
 
   public getOrderId(): string {
@@ -31,5 +34,17 @@ export default class Order {
 
   public setPaymentId(paymentId: string): void {
     this.paymentId = paymentId;
+  }
+
+  // API methods
+
+  public isGiftCardMatch(giftCardId: string): boolean {
+    return this.product instanceof GiftCard &&
+      this.product.getCardId() === giftCardId;
+  }
+
+  public getGiftCard(giftCardId: string): GiftCard | null {
+    return this.product instanceof GiftCard &&
+      this.product.getCardId() === giftCardId ? this.product : null;
   }
 }

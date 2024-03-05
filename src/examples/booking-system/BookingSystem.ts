@@ -1,7 +1,7 @@
 import Order from "./orders/Order";
 import { PaymentMethod } from "./payments/PaymentMethod";
 import PaymentOperationsProvider from "./payments/PaymentOperationsProvider";
-import GiftCard from "./products/GiftCard";
+import { default as Book } from "./products/Book";
 import ActivityReservation from "./reservations/ActivityReservation";
 import FlightReservation from "./reservations/FlightReservation";
 import HotelReservation from "./reservations/HotelReservation";
@@ -70,21 +70,23 @@ export default class BookingSystem {
     }
   }
 
-  public addGiftCardPurchase(clientEmail: string,
-    cardValue: number, currencyCode: string,
-      paymentMethod: PaymentMethod): string {
+  public addTravelBookPurchase(
+    clientEmail: string,
+    bookName: string,
+    bookPrice: number,
+    currencyCode: string,
+    paymentMethod: PaymentMethod): string {
     
     // create gift-card object
-    const giftCard: GiftCard = new GiftCard(clientEmail, cardValue,
-      currencyCode);
+    const giftCardId: string = generateUniqueId();
+    const book: Book = new Book(bookName, bookPrice, currencyCode);
 
     // create order object
     const orderId: string = generateUniqueId();
-    const order: Order = new Order(orderId, clientEmail,
-      giftCard);
+    const order: Order = new Order(orderId, clientEmail, book);
     
     if (this.addOrder(order, paymentMethod)) {
-      return orderId;
+      return giftCardId;
     } else {
       return "";
     }
@@ -126,6 +128,7 @@ export default class BookingSystem {
       console.log("charge failed");
       return false;
     }
+    // charge is successful
     reservation.setPaymentId(paymentId);
     this.reservations.push(reservation);
     return true;
@@ -133,16 +136,18 @@ export default class BookingSystem {
 
   private addOrder(order: Order, paymentMethod: PaymentMethod): boolean {
     // charge
-    if (this.PaymentOperationsProvider.makePayment(order, paymentMethod)) {
-      // if charge is successful
-      this.orders.push(order);
-      return true;
-    } else {
+    const paymentId: string = this.PaymentOperationsProvider.makePayment(
+      order, paymentMethod);
+    if (! paymentId) {
       // if charge is not successful
       console.log("charge failed");
       return false;
     }
+    // charge is successful
+    this.orders.push(order);
+    return true;
   }
+
 }
 
 function generateUniqueId(): string {

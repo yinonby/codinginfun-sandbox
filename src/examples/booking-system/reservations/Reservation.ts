@@ -3,8 +3,9 @@ import Payable from "../payments/Payable";
 export default abstract class Reservation implements Payable {
   private paymentId: string = "";
 
-  constructor(private reservationId: string,
-    private clientEmail: string) {
+  constructor(
+    private readonly reservationId: string,
+    private readonly clientEmail: string) {
   }
 
   public getReservationId(): string {

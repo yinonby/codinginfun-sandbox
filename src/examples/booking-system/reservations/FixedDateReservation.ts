@@ -1,7 +1,8 @@
 import Reservation from "./Reservation";
 
 export default abstract class FixedDateReservation extends Reservation {
-  constructor(reservationId: string,
+  constructor(
+    reservationId: string,
     clientEmail: string) {
 
     super(reservationId, clientEmail);

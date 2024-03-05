@@ -5,10 +5,3 @@ export type StripeCreditCard = {
   creditCardExpirationMonth: number,
   creditCardValidationCode: string,
 }
-
-export type StripeBankAccount = {
-  ibanNumber: string,
-  bankSwiftCode: string,
-}
-
-export type StripePaymentMethod = StripeCreditCard | StripeBankAccount;

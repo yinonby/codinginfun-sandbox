@@ -1,12 +1,14 @@
 import DateRangeReservation from "./DateRangeReservation";
 
 export default class HotelReservation extends DateRangeReservation {
-  constructor(reservationId: string,
+  constructor(
+    reservationId: string,
     clientEmail: string,
-    private startDate: string, private endDate: string,
-    private rate: number,
-    private currencyCode: string,
-    private hotelName: string) {
+    private readonly startDate: string,
+    private readonly endDate: string,
+    private readonly rate: number,
+    private readonly currencyCode: string,
+    private readonly hotelName: string) {
 
     super(reservationId, clientEmail);
   }

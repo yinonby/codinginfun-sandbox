@@ -1,14 +1,14 @@
 
 export type CreditCard = {
+  paymentMethodName: "credit-card",
+  creditCardDetails: CreditCardDetails,
+}
+
+export type CreditCardDetails = {
   creditCardNumber: string,
   creditCardExpirationDay: number,
   creditCardExpirationMonth: number,
   creditCardValidationCode: string,
 }
 
-export type BankAccount = {
-  ibanNumber: string,
-  bankSwiftCode: string,
-}
-
-export type PaymentMethod = CreditCard | BankAccount;
+export type PaymentMethod = CreditCard;
