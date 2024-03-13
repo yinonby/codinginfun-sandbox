@@ -1,17 +1,26 @@
 
 class CreditCard {
   constructor(private cardNumber: string) {}
+
+  public getLast4Digits(): string {
+    return this.cardNumber.slice(-4);
+  }
 }
 
 class PaymentSystem {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public charge(creditCard: CreditCard, person: Person): void {
-    console.log("Sending payment request");
+  public charge(person: Person,
+    amount: number, currencyCode: string, creditCard: CreditCard): void {
+    console.log("Charging " + person.getFullName() +
+      ", amount: " + amount + currencyCode +
+      ", with credit card ending with: " + creditCard.getLast4Digits());
   }
 }
 
 class Person {
-  constructor(private firstName: string, private lastName: string) {
+  constructor(
+    private readonly firstName: string,
+    private readonly lastName: string) {
   }
 
   // API methods
@@ -21,41 +30,36 @@ class Person {
   }
 }
 
-abstract class ComicFan extends Person {
+class ComicFan extends Person {
+  constructor(
+    firstName: string,
+    lastName: string,
+    private readonly favoriteCharacter: string) {
+
+    super(firstName, lastName);
+  }
   // API methods
 
-  public abstract getFavoriteComicBook(): string;
-}
-
-class SpidermanFan extends ComicFan {
-  public getFavoriteComicBook(): string {
-    return "Spiderman";
-  }
-}
-
-class SupermanFan extends ComicFan {
-  public getFavoriteComicBook(): string {
-    return "Superman";
-  }
-}
-
-class BatmanFan extends ComicFan {
-  public getFavoriteComicBook(): string {
-    return "Batman";
+  public getFavoriteCharacter(): string {
+    return this.favoriteCharacter;
   }
 }
 
 class ComicCon {
   private participants: ComicFan[] = [];
   private paymentSystem: PaymentSystem = new PaymentSystem();
+  private amountUSD: number = 15;
 
-  public register(participant: ComicFan, creditCard: CreditCard): void {
+  public register(firstName: string, lastName: string,
+    favoriteCharacter: string, creditCard: CreditCard): void {
+    const participant: ComicFan = new ComicFan(firstName, lastName,
+      favoriteCharacter);
     // charge the participant
     // This is the key point of this exercise: the method 'charge()' accepts
     // a parameter of type 'Person'. We pass the variable 'participant', which
     // is of type 'ComicFan', which whill then take its form as a
     // 'Person', inside the 'charge()' method
-    this.paymentSystem.charge(creditCard, participant);
+    this.paymentSystem.charge(participant, this.amountUSD, "USD", creditCard);
 
     // when charge is completed with no errors, add the participant to the
     // list of participants
@@ -73,10 +77,10 @@ const SMITH_FAMILY_CREDIT_CARD = new CreditCard("1111 1111 1111 1111");
 const HUNTER_FAMILY_CREDIT_CARD = new CreditCard("2222 2222 2222 2222");
 const comicCon: ComicCon = new ComicCon();
 
-comicCon.register(new SpidermanFan("Lisa", "Smith"), SMITH_FAMILY_CREDIT_CARD);
-comicCon.register(new SupermanFan("Bob", "Smith"), SMITH_FAMILY_CREDIT_CARD);
-comicCon.register(new BatmanFan("Monica", "Hunter"), HUNTER_FAMILY_CREDIT_CARD);
-comicCon.register(new SupermanFan("Rob", "Hunter"), HUNTER_FAMILY_CREDIT_CARD);
+comicCon.register("Lisa", "Smith", "Spiderman", SMITH_FAMILY_CREDIT_CARD);
+comicCon.register("Bob", "Smith", "Superman", SMITH_FAMILY_CREDIT_CARD);
+comicCon.register("Monica", "Hunter", "Batman", HUNTER_FAMILY_CREDIT_CARD);
+comicCon.register("Rob", "Hunter", "Superman", HUNTER_FAMILY_CREDIT_CARD);
 
 /* do not change anything below this line */
 export { comicCon };

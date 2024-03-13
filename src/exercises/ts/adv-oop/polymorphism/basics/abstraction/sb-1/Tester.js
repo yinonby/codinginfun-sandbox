@@ -2,7 +2,7 @@
 
 import TestError from "../../../../../../../infra/test/TestError";
 import {
-  comicCon,
+  ComicCon, comicCon,
 } from "./Exercise";
 
 export class Tester {
@@ -12,7 +12,7 @@ export class Tester {
   }
 
   testParticipants() {
-    if (! comicCon.prototype.hasOwnProperty("getParticipants")) {
+    if (! ComicCon.prototype.hasOwnProperty("getParticipants")) {
       throw new TestError(
         "ComicCon must implement getParticipants()");
     }
@@ -28,14 +28,14 @@ export class Tester {
     this.testParticipant(participants[3], "Rob", "Hunter", "Superman");
   }
 
-  testParticipant(participant, firstName, lastName, favoriteComicBook) {
+  testParticipant(participant, firstName, lastName, favoriteCharacter) {
     const expectedFullName = firstName + " " + lastName;
     if (participant.getFullName() !== expectedFullName) {
       throw new TestError("Incorrect full name, expected: " + expectedFullName);
     }
 
-    if (participant.getFavoriteComicBook() !== favoriteComicBook) {
-      throw new TestError("Incorrect book, expected: " + favoriteComicBook);
+    if (participant.getFavoriteCharacter() !== favoriteCharacter) {
+      throw new TestError("Incorrect book, expected: " + favoriteCharacter);
     }
   }
 }

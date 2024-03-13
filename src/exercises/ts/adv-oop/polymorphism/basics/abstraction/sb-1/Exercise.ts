@@ -2,18 +2,24 @@
 
 class CreditCard {
   constructor(private cardNumber: string) {}
+
+  public getLast4Digits(): string {
+    return this.cardNumber.slice(-4);
+  }
 }
 
 class PaymentSystem {
   // implement a public method named 'charge()' with a return-type 'void'
-  // - the method should accept 2 parameters:
-  //   2. parameter named 'creditCard' of type 'CreditCard'.
-  //   1. parameter named 'person' of type 'Person'.
-  // - the method should print to the output "Payment completed!"
+  // - the method should accept 4 parameters:
+  //   - parameter named 'person' of type 'Person'.
+  //   - parameter named 'amount' of type 'number'.
+  //   - parameter named 'currencyCode' of type 'string'.
+  //   - parameter named 'creditCard' of type 'CreditCard'.
+  // - the method should print to the output information about the charge
 }
 
 class Person {
-  // implement a constructor with 2 private parameter properties:
+  // implement a constructor with 2 private readonly parameter properties:
   // 'firstName' and 'lastName'
 
   // implement a public method named 'getFullName()' with a return-type string
@@ -21,24 +27,14 @@ class Person {
   // firstName and lastName, separated by a single space
 }
 
-abstract class ComicFan extends Person {
-  // declare a public abstract method named 'getFavoriteComicBook()' with
-  // a return-type 'string'
-}
+class ComicFan extends Person {
+  // implement a constructor with 3 parameters:
+  // 'firstName' of type string
+  // 'lastName' of type string
+  // private readonly property 'favoriteCharacter' of type 'string
 
-class SpidermanFan extends ComicFan {
-  // implement abstract method 'getFavoriteComicBook()' so that it
-  // returns the string "Spiderman"
-}
-
-class SupermanFan extends ComicFan {
-  // implement abstract method 'getFavoriteComicBook()' so that it
-  // returns the string "Superman"
-}
-
-class BatmanFan extends ComicFan {
-  // implement abstract method 'getFavoriteComicBook()' so that it
-  // returns the string "Batman"
+  // implement a public getter method named 'getFavoriteCharacter()', which
+  // returns the value of the property 'favoriteCharacter'
 }
 
 class ComicCon {
@@ -49,15 +45,21 @@ class ComicCon {
   // 'PaymentSystem', and initialize it with a new instance of
   // the 'PaymentSystem' class
 
+  private amountUSD: number = 15;
+
   // implement a public method named 'register()' with a return-type 'void'
-  // - the method should accept 2 parameters:
-  //   1. parameter named 'participant' of type 'ComicFan'.
-  //   2. parameter named 'creditCard' of type 'CreditCard'.
+  // - the method should accept 4 parameters:
+  //   - parameter named 'firstName' of type 'string'.
+  //   - parameter named 'lastName' of type 'string'.
+  //   - parameter named 'favoriteCharacter' of type 'string'.
+  //   - parameter named 'creditCard' of type 'CreditCard'.
+  // - the method should construct a new ComicFan object and assign it to
+  //   a variable named 'participant'
   // - the method should call the payment system's 'charge()' method
-  //   with the participant and credit card
+  //   with the correct parameters
   //   This is the key point of this exercise: the method 'charge()' accepts
-  //   a parameter of type 'Person'. We pass the variable 'participant', which
-  //   is of type 'ComicFan', which whill then take its form as a
+  //   a parameter of type 'Person'. We pass the variable 'participant' of type
+  //   'ComicFan', which will then take its form as a
   //   'Person', inside the 'charge()' method
   // - when the charge is successfully completed, the method should
   //   add the 'participant' to the member property array 'participants'
@@ -71,18 +73,18 @@ const SMITH_FAMILY_CREDIT_CARD = new CreditCard("1111 1111 1111 1111");
 const HUNTER_FAMILY_CREDIT_CARD = new CreditCard("2222 2222 2222 2222");
 const comicCon: ComicCon = new ComicCon();
 
-// register a new 'SpidermanFan' to the Comic-Con, named "Lisa Smith",
+// register a new 'Spiderman' fan to the Comic-Con, named "Lisa Smith",
 // using the Smith family credit card
 
-// register a new 'SupermanFan' to the Comic-Con, named "Bob Smith"
+// register a new 'Superman' fan to the Comic-Con, named "Bob Smith"
 // using the Smith family credit card
 
-// register a new 'BatmanFan' to the Comic-Con, named "Monica Hunter"
+// register a new 'Batman' fan to the Comic-Con, named "Monica Hunter"
 // using the Hunter family credit card
 
-// register a new 'SupermanFan' to the Comic-Con, named "Rob Hunter"
+// register a new 'Superman' fan to the Comic-Con, named "Rob Hunter"
 // using the Hunter family credit card
 
 /* do not change anything below this line */
-export { comicCon };
+export { ComicCon, comicCon };
 
