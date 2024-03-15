@@ -1,19 +1,20 @@
 import Payable from "../payments/Payable";
+import Customer from "../persons/Customer";
 
 export default abstract class Reservation implements Payable {
   private paymentId: string = "";
 
   constructor(
     private readonly reservationId: string,
-    private readonly clientEmail: string) {
+    private readonly customer: Customer) {
   }
 
   public getReservationId(): string {
     return this.reservationId;
   }
 
-  public getClientEmail(): string {
-    return this.clientEmail;
+  public getcustomer(): Customer {
+    return this.customer;
   }
 
   public getPaymentId(): string {

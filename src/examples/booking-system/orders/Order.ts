@@ -1,3 +1,4 @@
+import Customer from "../persons/Customer";
 import Product from "../products/Product";
 
 // an order can usually consist of one or more products; however,
@@ -7,7 +8,7 @@ export default class Order {
 
   constructor(
     private readonly orderId: string,
-    private readonly clientEmail: string,
+    private readonly customer: Customer,
     private readonly products: Product[]) {
 
     // make sure there is at least 1 product
@@ -27,8 +28,8 @@ export default class Order {
     return this.orderId;
   }
 
-  public getClientEmail(): string {
-    return this.clientEmail;
+  public getcustomer(): Customer {
+    return this.customer;
   }
 
   public getRate(): number {

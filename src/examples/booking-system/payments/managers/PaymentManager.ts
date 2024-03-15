@@ -1,3 +1,4 @@
+import Person from "../../persons/person";
 import GiftCard from "../../products/Book";
 import Payable from "../Payable";
 import { PaymentMethod } from "../PaymentMethod";
@@ -10,9 +11,10 @@ export default class PaymentManager implements PaymentOperationsProvider {
   constructor(private ExternalPaymentProcessingAdapter: ExternalPaymentProcessingAdapter) {}
 
   // this method sends a charge command to the external payment provider
-  public makePayment(payable: Payable, paymentMethod: PaymentMethod): string {
+  public makePayment(person: Person, payable: Payable,
+    paymentMethod: PaymentMethod): string {
     if (paymentMethod.paymentMethodName === "credit-card") {
-      return this.ExternalPaymentProcessingAdapter.charge(payable,
+      return this.ExternalPaymentProcessingAdapter.charge(person, payable,
         paymentMethod);
     } else {
       return "";

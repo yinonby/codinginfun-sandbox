@@ -1,11 +1,12 @@
+import Customer from "../persons/Customer";
 import Reservation from "./Reservation";
 
 export default abstract class DateRangeReservation extends Reservation {
   constructor(
     reservationId: string,
-    clientEmail: string) {
+    customer: Customer) {
 
-    super(reservationId, clientEmail);
+    super(reservationId, customer);
   }
 
   public abstract getStartDate(): string;

@@ -15,7 +15,7 @@ export default class BookingSystem {
 
   // API methods
 
-  public addHotelReservation(clientEmail: string,
+  public addHotelReservation(customerEmail: string,
     hotelName: string, startDate: string, endDate: string,
     rate: number, currencyCode: string,
       paymentMethod: PaymentMethod): string {
@@ -23,7 +23,7 @@ export default class BookingSystem {
     // create reservation object
     const reservationId: string = generateUniqueId();
     const hotelReservation: HotelReservation = new HotelReservation(
-      reservationId, clientEmail,
+      reservationId, customerEmail,
       startDate, endDate, rate, currencyCode, hotelName);
     
     if (this.addReservation(hotelReservation, paymentMethod)) {
@@ -33,7 +33,7 @@ export default class BookingSystem {
     }
   }
 
-  public addFlightReservation(clientEmail: string,
+  public addFlightReservation(customerEmail: string,
     originAirportCode: string, destinationAirportCode: string,
     flightDate: string,
     flightRate: number, currencyCode: string,
@@ -42,7 +42,7 @@ export default class BookingSystem {
     // create reservation object
     const reservationId: string = generateUniqueId();
     const flightReservation: FlightReservation = new FlightReservation(
-      reservationId, clientEmail, flightDate,
+      reservationId, customerEmail, flightDate,
       originAirportCode, destinationAirportCode, flightRate, currencyCode);
     
     if (this.addReservation(flightReservation, paymentMethod)) {
@@ -52,7 +52,7 @@ export default class BookingSystem {
     }
   }
 
-  public addActivityReservation(clientEmail: string,
+  public addActivityReservation(customerEmail: string,
     activityName: string, activityDate: string,
     activityRate: number, currencyCode: string,
     paymentMethod: PaymentMethod): string {
@@ -60,7 +60,7 @@ export default class BookingSystem {
     // create reservation object
     const reservationId: string = generateUniqueId();
     const activityReservation: ActivityReservation = new ActivityReservation(
-      reservationId, clientEmail, activityName, activityDate,
+      reservationId, customerEmail, activityName, activityDate,
       activityRate, currencyCode);
     
     if (this.addReservation(activityReservation, paymentMethod)) {
@@ -71,7 +71,7 @@ export default class BookingSystem {
   }
 
   public addTravelBookPurchase(
-    clientEmail: string,
+    customerEmail: string,
     bookName: string,
     bookPrice: number,
     currencyCode: string,
@@ -82,7 +82,7 @@ export default class BookingSystem {
 
     // create order object
     const orderId: string = generateUniqueId();
-    const order: Order = new Order(orderId, clientEmail, [book]);
+    const order: Order = new Order(orderId, customerEmail, [book]);
     
     if (this.addOrder(order, paymentMethod)) {
       return orderId;

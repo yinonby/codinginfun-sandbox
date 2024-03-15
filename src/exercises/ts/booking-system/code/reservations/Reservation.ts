@@ -5,15 +5,15 @@ export default abstract class Reservation implements Payable {
 
   constructor(
     private readonly reservationId: string,
-    private readonly clientEmail: string) {
+    private readonly customerEmail: string) {
   }
 
   public getReservationId(): string {
     return this.reservationId;
   }
 
-  public getClientEmail(): string {
-    return this.clientEmail;
+  public getcustomerEmail(): string {
+    return this.customerEmail;
   }
 
   public getPaymentId(): string {

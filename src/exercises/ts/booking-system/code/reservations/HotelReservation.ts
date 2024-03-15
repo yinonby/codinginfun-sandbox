@@ -3,14 +3,14 @@ import DateRangeReservation from "./DateRangeReservation";
 export default class HotelReservation extends DateRangeReservation {
   constructor(
     reservationId: string,
-    clientEmail: string,
+    customerEmail: string,
     private readonly startDate: string,
     private readonly endDate: string,
     private readonly rate: number,
     private readonly currencyCode: string,
     private readonly hotelName: string) {
 
-    super(reservationId, clientEmail);
+    super(reservationId, customerEmail);
   }
 
   public getRate(): number {

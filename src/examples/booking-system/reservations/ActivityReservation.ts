@@ -1,15 +1,16 @@
+import Customer from "../persons/Customer";
 import FixedDateReservation from "./FixedDateReservation";
 
 export default class ActivityReservation extends FixedDateReservation {
   constructor(
     reservationId: string,
-    clientEmail: string,
+    customer: Customer,
     private readonly activityName: string,
     private readonly activityDate: string,
     private readonly activityRate: number,
     private readonly currencyCode: string) {
 
-    super(reservationId, clientEmail);
+    super(reservationId, customer);
   }
 
   public getFixedDate(): string {

@@ -3,9 +3,9 @@ import Reservation from "./Reservation";
 export default abstract class DateRangeReservation extends Reservation {
   constructor(
     reservationId: string,
-    clientEmail: string) {
+    customerEmail: string) {
 
-    super(reservationId, clientEmail);
+    super(reservationId, customerEmail);
   }
 
   public abstract getStartDate(): string;

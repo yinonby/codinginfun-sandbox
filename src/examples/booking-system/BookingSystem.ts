@@ -1,6 +1,7 @@
 import Order from "./orders/Order";
 import { PaymentMethod } from "./payments/PaymentMethod";
 import PaymentOperationsProvider from "./payments/PaymentOperationsProvider";
+import Customer from "./persons/Customer";
 import { default as Book } from "./products/Book";
 import ActivityReservation from "./reservations/ActivityReservation";
 import FlightReservation from "./reservations/FlightReservation";
@@ -15,55 +16,73 @@ export default class BookingSystem {
 
   // API methods
 
-  public addHotelReservation(clientEmail: string,
+  public addHotelReservation(
+    firstName: string,
+    lastName: string,
+    customerEmail: string,
     hotelName: string, startDate: string, endDate: string,
     rate: number, currencyCode: string,
       paymentMethod: PaymentMethod): string {
+
+    // create customer object
+    const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create reservation object
     const reservationId: string = generateUniqueId();
     const hotelReservation: HotelReservation = new HotelReservation(
-      reservationId, clientEmail,
+      reservationId, customer,
       startDate, endDate, rate, currencyCode, hotelName);
     
-    if (this.addReservation(hotelReservation, paymentMethod)) {
+    if (this.addReservation(customer, hotelReservation, paymentMethod)) {
       return reservationId;
     } else {
       return "";
     }
   }
 
-  public addFlightReservation(clientEmail: string,
+  public addFlightReservation(
+    firstName: string,
+    lastName: string,
+    customerEmail: string,
     originAirportCode: string, destinationAirportCode: string,
     flightDate: string,
     flightRate: number, currencyCode: string,
     paymentMethod: PaymentMethod): string {
+
+    // create customer object
+    const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create reservation object
     const reservationId: string = generateUniqueId();
     const flightReservation: FlightReservation = new FlightReservation(
-      reservationId, clientEmail, flightDate,
+      reservationId, customer, flightDate,
       originAirportCode, destinationAirportCode, flightRate, currencyCode);
     
-    if (this.addReservation(flightReservation, paymentMethod)) {
+    if (this.addReservation(customer, flightReservation, paymentMethod)) {
       return reservationId;
     } else {
       return "";
     }
   }
 
-  public addActivityReservation(clientEmail: string,
+  public addActivityReservation(
+    firstName: string,
+    lastName: string,
+    customerEmail: string,
     activityName: string, activityDate: string,
     activityRate: number, currencyCode: string,
     paymentMethod: PaymentMethod): string {
+
+    // create customer object
+    const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create reservation object
     const reservationId: string = generateUniqueId();
     const activityReservation: ActivityReservation = new ActivityReservation(
-      reservationId, clientEmail, activityName, activityDate,
+      reservationId, customer, activityName, activityDate,
       activityRate, currencyCode);
     
-    if (this.addReservation(activityReservation, paymentMethod)) {
+    if (this.addReservation(customer, activityReservation, paymentMethod)) {
       return reservationId;
     } else {
       return "";
@@ -71,20 +90,25 @@ export default class BookingSystem {
   }
 
   public addTravelBookPurchase(
-    clientEmail: string,
+    firstName: string,
+    lastName: string,
+    customerEmail: string,
     bookName: string,
     bookPrice: number,
     currencyCode: string,
     paymentMethod: PaymentMethod): string {
+
+    // create customer object
+    const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create gift-card object
     const book: Book = new Book(bookName, bookPrice, currencyCode);
 
     // create order object
     const orderId: string = generateUniqueId();
-    const order: Order = new Order(orderId, clientEmail, [book]);
+    const order: Order = new Order(orderId, customer, [book]);
     
-    if (this.addOrder(order, paymentMethod)) {
+    if (this.addOrder(customer, order, paymentMethod)) {
       return orderId;
     } else {
       return "";
@@ -117,11 +141,11 @@ export default class BookingSystem {
 
   // internal methods
 
-  private addReservation(reservation: Reservation,
+  private addReservation(customer: Customer, reservation: Reservation,
     paymentMethod: PaymentMethod): boolean {
     // charge
     const paymentId: string = this.PaymentOperationsProvider.makePayment(
-      reservation, paymentMethod);
+      customer, reservation, paymentMethod);
     if (! paymentId) {
       // if charge is not successful
       console.log("charge failed");
@@ -133,10 +157,11 @@ export default class BookingSystem {
     return true;
   }
 
-  private addOrder(order: Order, paymentMethod: PaymentMethod): boolean {
+  private addOrder(customer: Customer, order: Order,
+    paymentMethod: PaymentMethod): boolean {
     // charge
     const paymentId: string = this.PaymentOperationsProvider.makePayment(
-      order, paymentMethod);
+      customer, order, paymentMethod);
     if (! paymentId) {
       // if charge is not successful
       console.log("charge failed");

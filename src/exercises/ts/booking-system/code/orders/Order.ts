@@ -7,7 +7,7 @@ export default class Order {
 
   constructor(
     private readonly orderId: string,
-    private readonly clientEmail: string,
+    private readonly customerEmail: string,
     private readonly products: Product[]) {
 
     // make sure there is at least 1 product
@@ -27,8 +27,8 @@ export default class Order {
     return this.orderId;
   }
 
-  public getClientEmail(): string {
-    return this.clientEmail;
+  public getcustomerEmail(): string {
+    return this.customerEmail;
   }
 
   public getRate(): number {
