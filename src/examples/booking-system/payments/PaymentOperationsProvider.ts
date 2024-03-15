@@ -1,9 +1,9 @@
-import Person from "../persons/person";
+import Customer from "../persons/Customer";
 import Payable from "./Payable";
 import { PaymentMethod } from "./PaymentMethod";
 
 export default interface PaymentOperationsProvider {
-  makePayment(person: Person, payable: Payable,
+  makePayment(customer: Customer, payable: Payable,
     paymentMethod: PaymentMethod): string;
   cancelPayment(paymentId: string): boolean;
 }
