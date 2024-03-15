@@ -21,7 +21,8 @@ export default class StripeMock {
       stripeCreditCard: stripeCreditCard,
     }
 
-    // here the system should charge the payment method
+    // here, a real system would make the actual charge of the payment method
+    // and throw an error in case charge fails
 
     this.paymentHistoryMap.set(paymentId, stripePaymentRecord);
     return paymentId;
@@ -29,16 +30,15 @@ export default class StripeMock {
 
   // the method 'refund()' uses the given payment-id to search for
   // the payment record and, if found, refunds the amount previously charged
-  public refund(paymentId: string): boolean {
+  public refund(paymentId: string): void {
     const stripePaymentRecord: StripePaymentRecord | undefined =
       this.paymentHistoryMap.get(paymentId);
     if (! stripePaymentRecord) {
-      return false;
+      throw new Error("payment not found, paymentId: " + paymentId);
     }
 
-    // here the system should make a refund to the payment method on record
-
-    return true;
+    // here, a real system would make the actual refund to the payment method
+    // and throw a failure in case refund fails
   }
 }
 

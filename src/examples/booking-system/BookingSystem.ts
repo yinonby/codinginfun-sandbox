@@ -33,11 +33,8 @@ export default class BookingSystem {
       reservationId, customer,
       startDate, endDate, rate, currencyCode, hotelName);
     
-    if (this.addReservation(customer, hotelReservation, paymentMethod)) {
-      return reservationId;
-    } else {
-      return "";
-    }
+    this.addReservation(customer, hotelReservation, paymentMethod);
+    return reservationId;
   }
 
   public addFlightReservation(
@@ -58,11 +55,8 @@ export default class BookingSystem {
       reservationId, customer, flightDate,
       originAirportCode, destinationAirportCode, flightRate, currencyCode);
     
-    if (this.addReservation(customer, flightReservation, paymentMethod)) {
-      return reservationId;
-    } else {
-      return "";
-    }
+    this.addReservation(customer, flightReservation, paymentMethod);
+    return reservationId;
   }
 
   public addActivityReservation(
@@ -82,11 +76,8 @@ export default class BookingSystem {
       reservationId, customer, activityName, activityDate,
       activityRate, currencyCode);
     
-    if (this.addReservation(customer, activityReservation, paymentMethod)) {
-      return reservationId;
-    } else {
-      return "";
-    }
+    this.addReservation(customer, activityReservation, paymentMethod);
+    return reservationId;
   }
 
   public addTravelBookPurchase(
@@ -120,19 +111,12 @@ export default class BookingSystem {
     const reservationIdx: number = this.reservations.findIndex(e =>
       e.getReservationId() === reservationId);
     if (reservationIdx === -1) {
-      // reservation not found
-      console.log("reservation not found: " + reservationId);
-      return false;
+      throw new Error("Reservation not found: " + reservationId);
     }
     const reservation: Reservation = this.reservations[reservationIdx];
 
     // if paid, refund payment
-    if (! this.PaymentOperationsProvider.cancelPayment(
-      reservation.getPaymentId())) {
-      // if cannot refund, exit and return false
-      console.log("refund failed: " + reservationId);
-      return false;
-    }
+    this.PaymentOperationsProvider.cancelPayment(reservation.getPaymentId());
 
     // remove from array
     this.reservations.splice(reservationIdx, 1);
@@ -142,19 +126,13 @@ export default class BookingSystem {
   // internal methods
 
   private addReservation(customer: Customer, reservation: Reservation,
-    paymentMethod: PaymentMethod): boolean {
+    paymentMethod: PaymentMethod): void {
     // charge
     const paymentId: string = this.PaymentOperationsProvider.makePayment(
       customer, reservation, paymentMethod);
-    if (! paymentId) {
-      // if charge is not successful
-      console.log("charge failed");
-      return false;
-    }
     // charge is successful
     reservation.setPaymentId(paymentId);
     this.reservations.push(reservation);
-    return true;
   }
 
   private addOrder(customer: Customer, order: Order,
@@ -162,11 +140,6 @@ export default class BookingSystem {
     // charge
     const paymentId: string = this.PaymentOperationsProvider.makePayment(
       customer, order, paymentMethod);
-    if (! paymentId) {
-      // if charge is not successful
-      console.log("charge failed");
-      return false;
-    }
     // charge is successful
     this.orders.push(order);
     return true;

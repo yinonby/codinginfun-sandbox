@@ -17,13 +17,14 @@ export default class PaymentManager implements PaymentOperationsProvider {
       return this.ExternalPaymentProcessingAdapter.charge(customer, payable,
         paymentMethod);
     } else {
-      return "";
+      throw new Error("Unsupported payment method: " +
+        paymentMethod.paymentMethodName);
     }
   }
 
   // this method sends a refund command to the external payment provider
-  public cancelPayment(paymentId: string): boolean {
-    return this.ExternalPaymentProcessingAdapter.refund(paymentId);
+  public cancelPayment(paymentId: string): void {
+    this.ExternalPaymentProcessingAdapter.refund(paymentId);
   }
 
 }

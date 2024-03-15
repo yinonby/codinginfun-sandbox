@@ -15,6 +15,7 @@ const paymentProvider: PaymentOperationsProvider =
   new PaymentManager(ExternalPaymentProcessingAdapter);
 const bookingSystem: BookingSystem = new BookingSystem(paymentProvider);
 
+// first customer
 const paymentMethod1: PaymentMethod = {
   paymentMethodName: "credit-card",
   creditCardDetails: {
@@ -24,9 +25,33 @@ const paymentMethod1: PaymentMethod = {
     creditCardValidationCode: "000",
   }
 }
-const reservationId1: string = bookingSystem.addHotelReservation(
-  "client-1@gmail.com", "Ritz Paris", "2022-10-10", "2022-10-12",
-  100, "EUR", paymentMethod1);
+
+let reservationId1: string = "";
+try {
+  reservationId1 = bookingSystem.addHotelReservation(
+    "Lady", "Gaga",
+    "ladygaga@gmail.com", "Ritz Paris", "2022-10-10", "2022-10-12",
+    100, "EUR", paymentMethod1);
+} catch (err) {
+  console.error("Failed making hotel reservation!");
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
+}
+
+if (reservationId1) {
+  try {
+    bookingSystem.cancelReservation(reservationId1);
+  } catch (err) {
+    console.error("Failed cancelling hotel reservation!");
+      if (err instanceof Error) {
+        console.error(err.message);
+      }
+  }
+
+}
+
+// second customer
 
 const paymentMethod2: PaymentMethod = {
   paymentMethodName: "credit-card",
@@ -37,12 +62,29 @@ const paymentMethod2: PaymentMethod = {
     creditCardValidationCode: "000",
   }
 }
-bookingSystem.addHotelReservation(
-  "client-2@yahoo.com", "Carlton NYC", "2022-11-02", "2022-11-05",
-  130, "USD", paymentMethod2);
-bookingSystem.addTravelBookPurchase(
-  "Sites of Paris",
-  "client-2@yahoo.com",
-  100, "USD", paymentMethod2);
 
-bookingSystem.cancelReservation(reservationId1);
+try {
+  bookingSystem.addHotelReservation(
+    "Justin", "Biber",
+    "justinbiber@yahoo.com", "Carlton NYC", "2022-11-02", "2022-11-05",
+    130, "USD", paymentMethod2);
+} catch (err) {
+  console.error("Failed making hotel reservation!");
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
+}
+
+try {
+  bookingSystem.addTravelBookPurchase(
+    "Justin", "Biber",
+    "Sites of Paris",
+    "justinbiber@yahoo.com",
+    100, "USD", paymentMethod2);
+} catch (err) {
+  console.error("Failed making travel book order!");
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
+}
+
