@@ -1,7 +1,15 @@
 
-export type CreditCard = {
-  paymentMethodName: "credit-card",
-  creditCardDetails: CreditCardDetails,
+export abstract class PaymentMethod {
+}
+
+export class CreditCard extends PaymentMethod {
+  constructor(private creditCardDetails: CreditCardDetails) {
+    super();
+  }
+
+  public getCreditCardDetails(): CreditCardDetails {
+    return this.creditCardDetails;
+  }
 }
 
 export type CreditCardDetails = {
@@ -10,5 +18,3 @@ export type CreditCardDetails = {
   creditCardExpirationMonth: number,
   creditCardValidationCode: string,
 }
-
-export type PaymentMethod = CreditCard;

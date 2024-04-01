@@ -14,7 +14,7 @@ export default class StripeMock {
   // the given rate in the given currency, and returns a unique payment-id
   public charge(rate: number, currencyCode: string,
     stripeCreditCard: StripeCreditCard): string {
-    const paymentId: string = generateUniqueId();
+    const stripePaymentId: string = generateUniqueId();
     const stripePaymentRecord: StripePaymentRecord = {
       rate: rate,
       currencyCode: currencyCode,
@@ -24,17 +24,17 @@ export default class StripeMock {
     // here, a real system would make the actual charge of the payment method
     // and throw an error in case charge fails
 
-    this.paymentHistoryMap.set(paymentId, stripePaymentRecord);
-    return paymentId;
+    this.paymentHistoryMap.set(stripePaymentId, stripePaymentRecord);
+    return stripePaymentId;
   }
 
   // the method 'refund()' uses the given payment-id to search for
   // the payment record and, if found, refunds the amount previously charged
-  public refund(paymentId: string): void {
+  public refund(stripePaymentId: string): void {
     const stripePaymentRecord: StripePaymentRecord | undefined =
-      this.paymentHistoryMap.get(paymentId);
+      this.paymentHistoryMap.get(stripePaymentId);
     if (! stripePaymentRecord) {
-      throw new Error("payment not found, paymentId: " + paymentId);
+      throw new Error("payment not found, stripePaymentId: " + stripePaymentId);
     }
 
     // here, a real system would make the actual refund to the payment method

@@ -137,9 +137,10 @@ export default class BookingSystem {
 
   private addOrder(customer: Customer, order: Order,
     paymentMethod: PaymentMethod): boolean {
+      
     // charge
-    const paymentId: string = this.PaymentOperationsProvider.makePayment(
-      customer, order, paymentMethod);
+    this.PaymentOperationsProvider.makePayment(customer, order, paymentMethod);
+    
     // charge is successful
     this.orders.push(order);
     return true;
