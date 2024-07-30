@@ -6,18 +6,37 @@ import ExternalPaymentProcessingAdapter from "../../external-adapters/ExternalPa
 import PaymentOperationsProvider from "../PaymentOperationsProvider";
 
 type PaymentDetails = {
+  paymentProcessingServiceName: string
   externalPaymentId: string,
   isCanceled: boolean,
 }
 
 export class PaymentManagerError extends Error {}
 
+/*
+  property primaryExternalPaymentProcessingAdapter:
+  the primary payment processing service handling all payment processing
+
+  propery externalPaymentProcessingAdapters:
+  list of payment processing services, used to handle payment processing
+  operations of previous charges, possibly made using a payment processing
+  service that is not the primary, in case the primary has been changed
+*/
+
 export default class PaymentManager implements PaymentOperationsProvider {
   private readonly giftCards: GiftCard[] = []
   private paymentDetailsMap: Map<string, PaymentDetails> =
     new Map<string, PaymentDetails>;
+  private primaryExternalPaymentProcessingServiceName: string;
 
-  constructor(private externalPaymentProcessingAdapter: ExternalPaymentProcessingAdapter) {}
+  constructor(
+    private primaryExternalPaymentProcessingAdapter:
+      ExternalPaymentProcessingAdapter,
+    private externalPaymentProcessingAdapters:
+      ExternalPaymentProcessingAdapter[]) {
+    this.primaryExternalPaymentProcessingServiceName =
+      primaryExternalPaymentProcessingAdapter.getPaymentProcessingServiceName();
+  }
 
   // this method sends a charge command to the external payment provider
   public makePayment(customer: Customer, payable: Payable,
@@ -25,10 +44,12 @@ export default class PaymentManager implements PaymentOperationsProvider {
     // for now the system only supports credit-card methods
     if (paymentMethod instanceof CreditCard) {
       const externalPaymentId: string =
-        this.externalPaymentProcessingAdapter.chargeCard(
+        this.primaryExternalPaymentProcessingAdapter.chargeCard(
           customer, payable, paymentMethod);
       const paymentId: string = generateUniqueId();
       const paymentDetails: PaymentDetails = {
+        paymentProcessingServiceName:
+          this.primaryExternalPaymentProcessingServiceName,
         externalPaymentId: externalPaymentId,
         isCanceled: false,
       }
@@ -53,8 +74,18 @@ export default class PaymentManager implements PaymentOperationsProvider {
     }
 
     // send refund command
-    this.externalPaymentProcessingAdapter.refund(
-      paymentDetails.externalPaymentId);
+    let found = false;
+    for (const externalPaymentProcessingAdapter of this.externalPaymentProcessingAdapters) {
+      if (externalPaymentProcessingAdapter.getPaymentProcessingServiceName() === paymentDetails.paymentProcessingServiceName) {
+        externalPaymentProcessingAdapter.refund(
+          paymentDetails.externalPaymentId);
+      }
+    }
+    if (! found) {
+      throw new PaymentManagerError(
+        "External payment processing service not found: " +
+          paymentDetails.paymentProcessingServiceName);
+    }
 
     // update payment status
     paymentDetails.isCanceled = true;

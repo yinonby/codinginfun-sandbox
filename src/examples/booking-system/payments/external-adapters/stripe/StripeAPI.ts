@@ -5,6 +5,7 @@ import Payable from "../../Payable";
 import { CreditCard, CreditCardDetails } from "../../PaymentMethod";
 import ExternalPaymentProcessingAdapter from "../ExternalPaymentProcessingAdapter";
 
+export const PAYMENT_PROCESSING_SERVICE_NAME_STRIPE = "pps-stripe";
 export class StripeApiError extends Error {}
 
 // in a real environment, this class would be sending requests
@@ -13,6 +14,10 @@ export class StripeApiError extends Error {}
 export default class StripeAPI implements ExternalPaymentProcessingAdapter {
   private stripeMock: StripeMock = new StripeMock();
 
+  public getPaymentProcessingServiceName(): string {
+    return PAYMENT_PROCESSING_SERVICE_NAME_STRIPE;
+  }
+  
   // this method sends a charge command to the external payment provider
   public chargeCard(person: Person, payable: Payable,
     creditCard: CreditCard): string {

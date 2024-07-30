@@ -9,11 +9,15 @@ import PaymentManager from "./payments/payment-operations/managers/PaymentManage
 // note that if we want to change the external payment provider (i.e. Stripe),
 // all we have to do is to add a new external payment adapter and assign it
 // to the ExternalPaymentProcessingAdapter
-const ExternalPaymentProcessingAdapter: ExternalPaymentProcessingAdapter =
-  new StripeAPI();
+const stripeApi: StripeAPI = new StripeAPI();
+const primaryExternalPaymentProcessingAdapter: ExternalPaymentProcessingAdapter =
+  stripeApi;
+const externalPaymentProcessingAdapters: ExternalPaymentProcessingAdapter[] =
+  [stripeApi];
 
 const paymentProvider: PaymentOperationsProvider =
-  new PaymentManager(ExternalPaymentProcessingAdapter);
+  new PaymentManager(primaryExternalPaymentProcessingAdapter,
+    externalPaymentProcessingAdapters);
 const bookingSystem: BookingSystem = new BookingSystem(paymentProvider);
 
 // first customer
