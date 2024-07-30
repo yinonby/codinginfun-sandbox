@@ -37,6 +37,7 @@ try {
     "Lady", "Gaga",
     "ladygaga@gmail.com", "Ritz Paris", "2022-10-10", "2022-10-12",
     100, "EUR", validPaymentMethod1);
+  console.log("Made reservation with id: " + reservationId1);
 } catch (err) {
   console.error("Failed making hotel reservation!");
   if (err instanceof Error) {
@@ -47,13 +48,13 @@ try {
 if (reservationId1) {
   try {
     bookingSystem.cancelReservation(reservationId1);
-  } catch (err) {
+    console.log("Cancelled reservation with id: " + reservationId1);
+} catch (err) {
     console.error("Failed cancelling hotel reservation!");
     if (err instanceof Error) {
       console.error(err.message);
     }
   }
-
 }
 
 // second customer
@@ -68,11 +69,13 @@ const validPaymentMethod2: PaymentMethod = {
   }
 }
 
+let reservationId2: string = "";
 try {
-  bookingSystem.addHotelReservation(
+  reservationId2 = bookingSystem.addHotelReservation(
     "Justin", "Biber",
     "justinbiber@yahoo.com", "Carlton NYC", "2022-11-02", "2022-11-05",
     130, "USD", validPaymentMethod2);
+  console.log("Made reservation with id: " + reservationId2);
 } catch (err) {
   console.error("Failed making hotel reservation!");
   if (err instanceof Error) {
@@ -103,8 +106,8 @@ try {
 }
 
 if (error === null) {
-  console.error("Expected error due to invalid card number");
+  console.error("Expected error due to invalid card number, but got none");
 }
 if (! (error instanceof StripeApiError)) {
-  console.error("Expected StripeApiError due to invalid card number");
+  console.error("Expected StripeApiError due to invalid card numbe, but got noner");
 }
