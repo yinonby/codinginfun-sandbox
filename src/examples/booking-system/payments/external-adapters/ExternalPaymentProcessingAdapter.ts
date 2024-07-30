@@ -5,5 +5,5 @@ import { CreditCard } from "../PaymentMethod";
 export default interface ExternalPaymentProcessingAdapter {
   chargeCard(person: Person, payable: Payable,
     creditCard: CreditCard): string;
-  refund(paymentId: string): void;
+  refund(externalPaymentId: string): void;
 }

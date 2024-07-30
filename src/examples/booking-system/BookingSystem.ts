@@ -1,12 +1,14 @@
 import Order from "./orders/Order";
 import { PaymentMethod } from "./payments/PaymentMethod";
-import PaymentOperationsProvider from "./payments/PaymentOperationsProvider";
+import PaymentOperationsProvider from "./payments/payment-operations/PaymentOperationsProvider";
 import Customer from "./persons/Customer";
 import { default as Book } from "./products/Book";
 import ActivityReservation from "./reservations/ActivityReservation";
 import FlightReservation from "./reservations/FlightReservation";
 import HotelReservation from "./reservations/HotelReservation";
 import Reservation from "./reservations/Reservation";
+
+export class BookingSystemError extends Error {}
 
 export default class BookingSystem {
   private reservations: Reservation[] = [];
@@ -106,13 +108,17 @@ export default class BookingSystem {
     }
   }
 
-  public cancelReservation(reservationId: string): boolean {
+  public cancelReservation(reservationId: string): void {
     // search reservation
     const reservationIdx: number = this.reservations.findIndex(e =>
       e.getReservationId() === reservationId);
+
+    // if reservation not found, throw error
     if (reservationIdx === -1) {
-      throw new Error("Reservation not found: " + reservationId);
+      throw new BookingSystemError("Reservation not found: " + reservationId);
     }
+
+    // get the reservation
     const reservation: Reservation = this.reservations[reservationIdx];
 
     // if paid, refund payment
@@ -120,7 +126,6 @@ export default class BookingSystem {
 
     // remove from array
     this.reservations.splice(reservationIdx, 1);
-    return true;
   }
 
   // internal methods
