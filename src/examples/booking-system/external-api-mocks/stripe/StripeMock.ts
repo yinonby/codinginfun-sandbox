@@ -30,7 +30,7 @@ export default class StripeMock {
   // the given rate in the given currency, and returns a unique payment-id
   public charge(rate: number, currencyCode: string,
     stripeCreditCard: StripeCreditCard): StripeResponseCharge {
-    const stripePaymentId: string = generateUniqueId();
+    const stripePaymentId: string = Utils.generateUniqueId();
     const stripePaymentRecord: StripePaymentRecord = {
       rate: rate,
       currencyCode: currencyCode,
@@ -77,11 +77,4 @@ export default class StripeMock {
       status: STRIPE_RESPONSE_STATUS_E.STRIPE_RESPONSE_STATUS_OK,
     }
   }
-}
-
-function generateUniqueId(): string {
-  return "xxxx-xxxx-xxx-xxxx".replace(/[x]/g, function (c) {
-    const r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
 }
