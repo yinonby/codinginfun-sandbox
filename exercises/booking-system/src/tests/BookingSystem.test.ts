@@ -34,11 +34,11 @@ const validCC2: CreditCard = new CreditCard(validCCDetails2);
 const invalidCC: CreditCard = new CreditCard(invalidCCDetails);
 
 export function test() {
-  const bookingSystem: BookingSystem = BookingSystemFactory.buildBookingSystem();
-
   describe("Test BookingSystem", function () {
 
     describe("#addHotelReservation()", function () {
+      const bookingSystem: BookingSystem = BookingSystemFactory.buildBookingSystem();
+
       it("should create a hotel reservation", function () {
         const reservationId: string = bookingSystem.addHotelReservation(
           "Lady", "Gaga",
@@ -71,6 +71,8 @@ export function test() {
     });
 
     describe("#cancelReservation()", function () {
+      const bookingSystem: BookingSystem = BookingSystemFactory.buildBookingSystem();
+      
       it("should cancel a hotel reservation", function () {
         const reservationId: string = bookingSystem.addHotelReservation(
           "Lady", "Gaga",

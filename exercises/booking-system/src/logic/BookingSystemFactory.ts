@@ -7,6 +7,14 @@ import PaymentManager from "./payments/payment-operations/managers/PaymentManage
 
 export default class BookingSystemFactory {
   public static buildBookingSystem(): BookingSystem {
+    const paymentOperationsProvider: PaymentOperationsProvider =
+      BookingSystemFactory.buildPaymentManager();
+    const bookingSystem: BookingSystem = new BookingSystem(paymentOperationsProvider);
+
+    return bookingSystem;
+  }
+
+  public static buildPaymentManager(): PaymentManager {
     // note that if we want to change the external payment provider (i.e. Stripe),
     // all we have to do is to add a new external payment adapter and assign it
     // to the ExternalPaymentProcessingAdapter
@@ -16,11 +24,10 @@ export default class BookingSystemFactory {
     const externalPaymentProcessingAdapters: ExternalPaymentProcessingAdapter[] =
       [stripeApi];
 
-    const paymentProvider: PaymentOperationsProvider =
+    const paymentOperationsProvider: PaymentManager =
       new PaymentManager(primaryExternalPaymentProcessingAdapter,
         externalPaymentProcessingAdapters);
-    const bookingSystem: BookingSystem = new BookingSystem(paymentProvider);
 
-    return bookingSystem;
+    return paymentOperationsProvider;
   }
 }
