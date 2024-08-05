@@ -30,6 +30,10 @@ export default class HotelReservation extends DateRangeReservation {
     return this.endDate;
   }
 
+  public getHotelName(): string {
+    return this.hotelName;
+  }
+
   public getReservationSummary(): string {
     return "Hotel: " + this.hotelName +
       ", check-in: " + this.getStartDate() +

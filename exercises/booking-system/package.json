@@ -20,7 +20,7 @@
     "build": "parcel build src/index.html"
   },
   "imports": {
-    "#logic/*": "./src/logic/*"
+    "#infra/*": "./src/infra/*"
   },
   "eslintConfig": {
     "extends": [

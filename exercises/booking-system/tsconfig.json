@@ -7,8 +7,8 @@
       "esnext"
     ],
     "paths": {
-      "#logic/*": [
-        "./src/logic/*"
+      "#infra/*": [
+        "./src/infra/*"
       ]
     },
     "allowJs": true,
