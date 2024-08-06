@@ -6,10 +6,11 @@ import { test as hotelReservationTest } from "./tests/HotelReservation.test";
 import { test as pmTest } from "./tests/PaymentManager.test";
 import { test as reservationTest } from "./tests/Reservation.test";
 import { test as stripeApiTest } from "./tests/StripeAPI.test";
-const { mocha } = window;
+//const { mocha } = window;
 
-mocha.setup("bdd");
-
+//mocha.setup("bdd");
+//mocha.checkLeaks();
+console.log(window.chai)
 reservationTest();
 activityReservationTest();
 flightReservationTest();
@@ -18,4 +19,4 @@ stripeApiTest();
 pmTest();
 bsTest();
 
-mocha.run();
+//mocha.run();
