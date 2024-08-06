@@ -1,9 +1,10 @@
+import Payable from "../payments/Payable";
 import Customer from "../persons/Customer";
 import Product from "../products/Product";
 
 // an order can usually consist of one or more products; however,
 // for simplicity of the exercise, our orders will consist of a single product
-export default class Order {
+export default class Order implements Payable {
   private paymentId: string = "";
 
   constructor(
@@ -28,7 +29,7 @@ export default class Order {
     return this.orderId;
   }
 
-  public getcustomer(): Customer {
+  public getCustomer(): Customer {
     return this.customer;
   }
 
