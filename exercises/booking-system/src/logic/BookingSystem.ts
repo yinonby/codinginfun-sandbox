@@ -1,3 +1,4 @@
+import Utils from "../utils/Utils";
 import Order from "./orders/Order";
 import { PaymentMethod } from "./payments/PaymentMethod";
 import PaymentOperationsProvider from "./payments/payment-operations/PaymentOperationsProvider";

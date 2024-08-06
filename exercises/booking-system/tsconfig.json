@@ -7,9 +7,6 @@
       "esnext"
     ],
     "paths": {
-      "#infra/*": [
-        "./src/infra/*"
-      ]
     },
     "allowJs": true,
     "skipLibCheck": true,

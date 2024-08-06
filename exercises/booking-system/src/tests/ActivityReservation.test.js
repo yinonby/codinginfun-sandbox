@@ -1,19 +1,19 @@
 
 import Customer from "../logic/persons/Customer";
 import ActivityReservation from "../logic/reservations/ActivityReservation";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
 export function test() {
   describe("Test ActivityReservation", function () {
     const reservationId = "fake-id";
-    const customer: Customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
+    const customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
     const activityName = "Ritz";
     const activityDate = "2030-10-10";
     const activityRate = 111;
     const currencyCode = "USD";
-    const activityReservation: ActivityReservation = new ActivityReservation(
+    const activityReservation = new ActivityReservation(
       reservationId, customer, activityName, activityDate, activityRate, currencyCode);
 
     describe("#getStartDate()", function () {

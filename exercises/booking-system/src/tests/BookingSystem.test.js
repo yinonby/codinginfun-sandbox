@@ -1,8 +1,7 @@
 
-import BookingSystem from "../logic/BookingSystem";
 import BookingSystemFactory from "../logic/BookingSystemFactory";
 import { invalidCC, validCC1, validCC2 } from "./TestConstants";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
@@ -10,10 +9,10 @@ export function test() {
   describe("Test BookingSystem", function () {
 
     describe("#addHotelReservation()", function () {
-      const bookingSystem: BookingSystem = BookingSystemFactory.buildBookingSystem();
+      const bookingSystem = BookingSystemFactory.buildBookingSystem();
 
       it("should create a hotel reservation", function () {
-        const reservationId: string = bookingSystem.addHotelReservation(
+        const reservationId = bookingSystem.addHotelReservation(
           "Lady", "Gaga",
           "ladygaga@gmail.com", "Ritz Paris", "2022-10-10", "2022-10-12",
           100, "EUR", validCC1);
@@ -21,7 +20,7 @@ export function test() {
       });
 
       it("should create another hotel reservation", function () {
-        const reservationId: string = bookingSystem.addHotelReservation(
+        const reservationId = bookingSystem.addHotelReservation(
           "Justin", "Biber",
           "justinbiber@yahoo.com", "Carlton NYC", "2022-11-02", "2022-11-05",
           130, "USD", validCC2);
@@ -39,10 +38,10 @@ export function test() {
     });
 
     describe("#cancelReservation()", function () {
-      const bookingSystem: BookingSystem = BookingSystemFactory.buildBookingSystem();
+      const bookingSystem = BookingSystemFactory.buildBookingSystem();
       
       it("should cancel a hotel reservation", function () {
-        const reservationId: string = bookingSystem.addHotelReservation(
+        const reservationId = bookingSystem.addHotelReservation(
           "Lady", "Gaga",
           "ladygaga@gmail.com", "Ritz Paris", "2022-10-10", "2022-10-12",
           100, "EUR", validCC1);

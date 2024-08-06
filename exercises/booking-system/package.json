@@ -16,9 +16,6 @@
     "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html"
   },
-  "imports": {
-    "#infra/*": "./src/infra/*"
-  },
   "browser": {
     "fs": false
   },

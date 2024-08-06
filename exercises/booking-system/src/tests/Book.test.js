@@ -1,15 +1,15 @@
 
 import Book from "../logic/products/Book";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
 export function test() {
   describe("Test Book", function () {
-    const bookName: string = "Harry Potter";
-    const bookPrice: number = 12;
-    const currencyCode: string = "EUR";
-    const book: Book = new Book(bookName, bookPrice, currencyCode);
+    const bookName = "Harry Potter";
+    const bookPrice = 12;
+    const currencyCode = "EUR";
+    const book = new Book(bookName, bookPrice, currencyCode);
 
     describe("#getBookName()", function () {
       it("should return book name", function () {

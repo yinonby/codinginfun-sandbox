@@ -1,20 +1,20 @@
 
 import Customer from "../logic/persons/Customer";
 import HotelReservation from "../logic/reservations/HotelReservation";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
 export function test() {
   describe("Test HotelReservation", function () {
     const reservationId = "fake-id";
-    const customer: Customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
+    const customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
     const startDate = "2030-10-10";
     const endDate = "2030-10-13";
     const rate = 111;
     const currencyCode = "USD";
     const hotelName = "Ritz";
-    const hotelReservation: HotelReservation = new HotelReservation(
+    const hotelReservation = new HotelReservation(
       reservationId, customer, startDate, endDate, rate, currencyCode,
       hotelName);
 

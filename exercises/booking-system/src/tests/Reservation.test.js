@@ -1,31 +1,16 @@
 
 import Customer from "../logic/persons/Customer";
-import Reservation from "../logic/reservations/Reservation";
-const { chai }: any = window;
+import SampleReservation from "./SampleReservation";
+const { chai } = window;
 
 const expect = chai.expect;
-
-class SampleReservation extends Reservation {
-
-  public getRate(): number {
-    return 0;
-  }
-
-  public getCurrencyCode(): string {
-    return "";
-  }
-
-  public getReservationSummary(): string {
-    return "";
-  }
-}
 
 export function test() {
   describe("Test Reservation", function () {
     const reservationId = "fake-id";
-    const customer: Customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
+    const customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
     const paymentId = "fake-payment-id";
-    const sampleReservation: SampleReservation = new SampleReservation(
+    const sampleReservation = new SampleReservation(
       reservationId, customer);
 
     describe("#getReservationId()", function () {

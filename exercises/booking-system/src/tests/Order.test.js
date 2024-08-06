@@ -1,8 +1,7 @@
 
 import Order from "../logic/orders/Order";
-import Product from "../logic/products/Product";
 import { book1_eur, book2_eur, book3_eur as book3_usd, customer1 } from "./TestConstants";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
@@ -11,7 +10,7 @@ export function test() {
     const orderId = "fake-order-id";
 
     describe("#constructor() - no products", function () {
-      const products: Product[] = [];
+      const products = [];
       it("should throw error", function () {
         expect(function() {
           new Order(orderId, customer1, products)
@@ -20,7 +19,7 @@ export function test() {
     });
 
     describe("#constructor() - mismatch currencies", function () {
-      const products: Product[] = [book1_eur, book3_usd];
+      const products = [book1_eur, book3_usd];
       it("should throw error", function () {
         expect(function() {
           new Order(orderId, customer1, products)
@@ -28,8 +27,8 @@ export function test() {
       });
     });
 
-    const products: Product[] = [book1_eur, book2_eur];
-    const order: Order = new Order(orderId, customer1, products);
+    const products = [book1_eur, book2_eur];
+    const order = new Order(orderId, customer1, products);
 
     describe("#getOrderId()", function () {
       it("should return order id", function () {

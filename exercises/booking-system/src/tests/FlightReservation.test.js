@@ -1,20 +1,20 @@
 
 import Customer from "../logic/persons/Customer";
 import FlightReservation from "../logic/reservations/FlightReservation";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
 export function test() {
   describe("Test FlightReservation", function () {
     const reservationId = "fake-id";
-    const customer: Customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
+    const customer = new Customer("Lady", "Gaga", "ladygaga@gmail.com");
     const flightDate = "2030-10-10";
-    const originAirportCode: string = "AAA";
-    const destinationAirportCode: string = "BBB";
+    const originAirportCode = "AAA";
+    const destinationAirportCode = "BBB";
     const flightRate = 111;
     const currencyCode = "USD";
-    const flightReservation: FlightReservation = new FlightReservation(
+    const flightReservation = new FlightReservation(
       reservationId, customer, flightDate, originAirportCode,
       destinationAirportCode, flightRate, currencyCode);
 

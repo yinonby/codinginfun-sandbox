@@ -1,14 +1,14 @@
 
 import Person from "../logic/persons/person";
-const { chai }: any = window;
+const { chai } = window;
 
 const expect = chai.expect;
 
 export function test() {
   describe("Test Person", function () {
-    const firstName: string = "Harry";
-    const lastName: string =  "Potter";
-    const person: Person = new Person(firstName, lastName);
+    const firstName = "Harry";
+    const lastName =  "Potter";
+    const person = new Person(firstName, lastName);
 
     describe("#getFirstName()", function () {
       it("should return first name", function () {
