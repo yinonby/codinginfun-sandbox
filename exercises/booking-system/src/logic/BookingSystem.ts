@@ -30,7 +30,7 @@ export default class BookingSystem {
     const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create reservation object
-    const reservationId: string = generateUniqueId();
+    const reservationId: string = Utils.generateUniqueId();
     const hotelReservation: HotelReservation = new HotelReservation(
       reservationId, customer,
       startDate, endDate, rate, currencyCode, hotelName);
@@ -52,7 +52,7 @@ export default class BookingSystem {
     const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create reservation object
-    const reservationId: string = generateUniqueId();
+    const reservationId: string = Utils.generateUniqueId();
     const flightReservation: FlightReservation = new FlightReservation(
       reservationId, customer, flightDate,
       originAirportCode, destinationAirportCode, flightRate, currencyCode);
@@ -73,7 +73,7 @@ export default class BookingSystem {
     const customer: Customer = new Customer(firstName, lastName, customerEmail);
     
     // create reservation object
-    const reservationId: string = generateUniqueId();
+    const reservationId: string = Utils.generateUniqueId();
     const activityReservation: ActivityReservation = new ActivityReservation(
       reservationId, customer, activityName, activityDate,
       activityRate, currencyCode);
@@ -98,7 +98,7 @@ export default class BookingSystem {
     const book: Book = new Book(bookName, bookPrice, currencyCode);
 
     // create order object
-    const orderId: string = generateUniqueId();
+    const orderId: string = Utils.generateUniqueId();
     const order: Order = new Order(orderId, customer, [book]);
     
     if (this.addOrder(customer, order, paymentMethod)) {
@@ -151,11 +151,4 @@ export default class BookingSystem {
     return true;
   }
 
-}
-
-function generateUniqueId(): string {
-  return "xxxx-xxxx-xxx-xxxx".replace(/[x]/g, function (c) {
-    const r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
 }

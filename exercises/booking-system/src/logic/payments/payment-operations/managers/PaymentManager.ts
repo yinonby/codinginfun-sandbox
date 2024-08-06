@@ -46,7 +46,7 @@ export default class PaymentManager implements PaymentOperationsProvider {
       const externalPaymentId: string =
         this.primaryExternalPaymentProcessingAdapter.chargeCard(
           customer, payable, paymentMethod);
-      const paymentId: string = generateUniqueId();
+      const paymentId: string = Utils.generateUniqueId();
       const paymentDetails: PaymentDetails = {
         paymentProcessingServiceName:
           this.primaryExternalPaymentProcessingServiceName,
@@ -99,11 +99,4 @@ export default class PaymentManager implements PaymentOperationsProvider {
     return null;
   }
 
-}
-
-function generateUniqueId(): string {
-  return "xxxx-xxxx-xxx-xxxx".replace(/[x]/g, function (c) {
-    const r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
 }
