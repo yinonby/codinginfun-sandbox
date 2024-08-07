@@ -1,5 +1,5 @@
 
-import Book from "../logic/products/Book";
+import Book from "../app/logic/products/Book";
 const { chai } = window;
 
 const expect = chai.expect;

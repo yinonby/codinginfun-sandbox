@@ -1,5 +1,5 @@
 
-import Reservation from "../logic/reservations/Reservation";
+import Reservation from "../app/logic/reservations/Reservation";
 
 export default class SampleReservation extends Reservation {
 

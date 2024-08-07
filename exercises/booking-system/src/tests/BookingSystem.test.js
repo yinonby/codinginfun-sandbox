@@ -1,5 +1,5 @@
 
-import BookingSystemFactory from "../logic/BookingSystemFactory";
+import BookingSystemFactory from "../app/logic/BookingSystemFactory";
 import { invalidCC, validCC1, validCC2 } from "./TestConstants";
 const { chai } = window;
 

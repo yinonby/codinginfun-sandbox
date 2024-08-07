@@ -1,7 +1,7 @@
 
-import StripeAPI from "../logic/payments/external-adapters/stripe/StripeAPI";
-import Customer from "../logic/persons/Customer";
-import Book from "../logic/products/Book";
+import StripeAPI from "../app/logic/payments/external-adapters/stripe/StripeAPI";
+import Customer from "../app/logic/persons/Customer";
+import Book from "../app/logic/products/Book";
 import { invalidCC, validCC1 } from "./TestConstants";
 const { chai } = window;
 

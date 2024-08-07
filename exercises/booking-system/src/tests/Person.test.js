@@ -1,5 +1,5 @@
 
-import Person from "../logic/persons/person";
+import Person from "../app/logic/persons/person";
 const { chai } = window;
 
 const expect = chai.expect;

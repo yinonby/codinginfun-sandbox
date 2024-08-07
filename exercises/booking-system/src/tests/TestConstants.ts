@@ -1,8 +1,8 @@
 
-import { STRIPE_CARD_NUMBER_INVALID } from "../logic/external-api-mocks/stripe/StripeMock";
-import { CreditCard, CreditCardDetails } from "../logic/payments/PaymentMethod";
-import Customer from "../logic/persons/Customer";
-import Book from "../logic/products/Book";
+import { STRIPE_CARD_NUMBER_INVALID } from "../app/logic/external-api-mocks/stripe/StripeMock";
+import { CreditCard, CreditCardDetails } from "../app/logic/payments/PaymentMethod";
+import Customer from "../app/logic/persons/Customer";
+import Book from "../app/logic/products/Book";
 
 // first customer
 export const validCCDetails1: CreditCardDetails = {

@@ -1,5 +1,5 @@
 
-import Customer from "../logic/persons/Customer";
+import Customer from "../app/logic/persons/Customer";
 const { chai } = window;
 
 const expect = chai.expect;

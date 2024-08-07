@@ -1,5 +1,5 @@
 
-import Order from "../logic/orders/Order";
+import Order from "../app/logic/orders/Order";
 import { book1_eur, book2_eur, book3_eur as book3_usd, customer1 } from "./TestConstants";
 const { chai } = window;
 

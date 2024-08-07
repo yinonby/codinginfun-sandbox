@@ -1,6 +1,6 @@
 
-import Customer from "../logic/persons/Customer";
-import ActivityReservation from "../logic/reservations/ActivityReservation";
+import Customer from "../app/logic/persons/Customer";
+import ActivityReservation from "../app/logic/reservations/ActivityReservation";
 const { chai } = window;
 
 const expect = chai.expect;
