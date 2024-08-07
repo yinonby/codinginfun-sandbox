@@ -36,4 +36,4 @@ stripeApiTest();
 pmTest();
 bsTest();
 
-//mocha.run();
+mocha.run(); // keep mocha.run() here and not in index.html for codesandbox
