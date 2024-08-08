@@ -5,6 +5,7 @@
     <title>Mocha Tests</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <div id="mocha"></div>
@@ -13,7 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.4.1/chai.min.js"></script>
 
     <script class="mocha-init">
-      mocha.setup('bdd');
+      mocha.setup({
+        bail: true,
+        ui: "bdd",
+        fullTrace: false,
+      });
       //mocha.checkLeaks();
     </script>
 

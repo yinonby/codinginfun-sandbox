@@ -1,0 +1,43 @@
+
+#mocha {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  height: calc(100vh - 90px);
+  overflow: hidden;
+}
+
+#mocha-stats {
+  position: relative;
+  border: 1px black solid;
+  border-radius: 4px;
+  top: 0;
+  left: 0;
+  right: auto;
+  margin-bottom: 16px !important;
+}
+
+#mocha-stats .progress {
+  display: inline-block;
+}
+
+#mocha-stats .passes,
+#mocha-stats .passes em {
+  color: green;
+}
+
+#mocha-stats .failures,
+#mocha-stats .failures em {
+  color: red;
+}
+
+#mocha-report {
+  flex: 1;
+  overflow-y: scroll;
+  padding-right: 150px !important;
+}
+
+#mocha-report .error {
+  max-height: 6px !important;
+  overflow: hidden !important;
+}

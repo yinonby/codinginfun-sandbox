@@ -15,10 +15,7 @@ import { test as pmTest } from "./tests/PaymentManager.test.js";
 import { test as reservationTest } from "./tests/Reservation.test.js";
 import { test as stripeApiTest } from "./tests/StripeAPI.test.js";
 
-//const { mocha } = window;
-
-//mocha.setup("bdd");
-//mocha.checkLeaks();
+const { mocha } = window;
 
 reservationTest();
 activityReservationTest();
