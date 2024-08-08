@@ -15,7 +15,28 @@ export default class BookingSystem {
   private reservations: Reservation[] = [];
   private orders: Order[] = [];
 
-  constructor(private PaymentOperationsProvider: PaymentOperationsProvider) {}
+  constructor(private paymentOperationsProvider: PaymentOperationsProvider) {}
+
+  // internal methods to wrap PaymentOperationsProvider methods
+
+  private makeReservationPayment(customer: Customer, reservation: Reservation,
+    paymentMethod: PaymentMethod): string {
+    // call the payment operations provider
+    return this.paymentOperationsProvider.makePayment(customer, reservation,
+      paymentMethod);
+  }
+
+  private makeOrderPayment(customer: Customer, order: Order,
+    paymentMethod: PaymentMethod): string {
+    // call the payment operations provider
+    return this.paymentOperationsProvider.makePayment(customer, order,
+      paymentMethod);
+  }
+
+  private cancelPayment(paymentId: string): void {
+    // call the payment operations provider
+    this.paymentOperationsProvider.cancelPayment(paymentId);
+  }
 
   // API methods
 
@@ -102,31 +123,28 @@ export default class BookingSystem {
     const orderId: string = Utils.generateUniqueId();
     const order: Order = new Order(orderId, customer, [book]);
     
-    if (this.addOrder(customer, order, paymentMethod)) {
-      return orderId;
-    } else {
-      return "";
-    }
+    this.addOrder(customer, order, paymentMethod);
+    return orderId;
   }
 
   public cancelReservation(reservationId: string): void {
-    // search reservation
-    const reservationIdx: number = this.reservations.findIndex(e =>
-      e.getReservationId() === reservationId);
+    // get the reservation
+    const reservation: Reservation | null = this.findReservation(reservationId);
 
     // if reservation not found, throw error
-    if (reservationIdx === -1) {
+    if (!reservation) {
       throw new BookingSystemError("Reservation not found: " + reservationId);
     }
+    // if reservation is canceled, throw error
+    if (reservation.isCanceled()) {
+      throw new BookingSystemError("Reservation is already canceled: " + reservationId);
+    }
 
-    // get the reservation
-    const reservation: Reservation = this.reservations[reservationIdx];
+    // refund payment
+    this.cancelPayment(reservation.getPaymentId());
 
-    // if paid, refund payment
-    this.PaymentOperationsProvider.cancelPayment(reservation.getPaymentId());
-
-    // remove from array
-    this.reservations.splice(reservationIdx, 1);
+    // update status to canceled
+    this.updateReservationToCanceled(reservation);
   }
 
   // internal methods
@@ -134,22 +152,39 @@ export default class BookingSystem {
   private addReservation(customer: Customer, reservation: Reservation,
     paymentMethod: PaymentMethod): void {
     // charge
-    const paymentId: string = this.PaymentOperationsProvider.makePayment(
-      customer, reservation, paymentMethod);
+    const paymentId: string = this.makeReservationPayment(customer, reservation,
+      paymentMethod);
     // charge is successful
     reservation.setPaymentId(paymentId);
     this.reservations.push(reservation);
   }
 
+  private findReservation(reservationId: string): Reservation | null {
+    // search reservation
+    const reservationIdx: number = this.reservations.findIndex(e =>
+      e.getReservationId() === reservationId);
+
+    // if reservation not found, throw error
+    if (reservationIdx === -1) {
+      return null;
+    }
+
+    // get the reservation
+    return this.reservations[reservationIdx];
+  }
+
+  private updateReservationToCanceled(reservation: Reservation): void {
+    reservation.cancel();
+  }
+
   private addOrder(customer: Customer, order: Order,
-    paymentMethod: PaymentMethod): boolean {
+    paymentMethod: PaymentMethod) {
       
     // charge
-    this.PaymentOperationsProvider.makePayment(customer, order, paymentMethod);
+    this.makeOrderPayment(customer, order, paymentMethod);
     
     // charge is successful
     this.orders.push(order);
-    return true;
   }
 
 }

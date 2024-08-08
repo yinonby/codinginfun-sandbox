@@ -1,7 +1,5 @@
 import { StripeCreditCard } from "../../../external-api-mocks/stripe/StripeCreditCard";
-import StripeMock, { STRIPE_RESPONSE_STATUS_E, StripeResponseCharge as StripeChargeResponse, StripeRefundResponse } from "../../../external-api-mocks/stripe/StripeMock";
-import Person from "../../../persons/person";
-import Payable from "../../Payable";
+import StripeMock from "../../../external-api-mocks/stripe/StripeMock";
 import { CreditCard, CreditCardDetails } from "../../PaymentMethod";
 import ExternalPaymentProcessingAdapter from "../ExternalPaymentProcessingAdapter";
 
@@ -11,6 +9,7 @@ export class StripeApiError extends Error {}
 // in a real environment, this class would be sending requests
 // to the Stripe servers; for this example, we use StripeMock - a class
 // that simulates a Stripe environment
+
 export default class StripeAPI implements ExternalPaymentProcessingAdapter {
   private stripeMock: StripeMock = new StripeMock();
 
@@ -18,11 +17,37 @@ export default class StripeAPI implements ExternalPaymentProcessingAdapter {
     return PAYMENT_PROCESSING_SERVICE_NAME_STRIPE;
   }
   
-  // this method sends a charge command to the external payment provider
-  public chargeCard(person: Person, payable: Payable,
-    creditCard: CreditCard): string {
+  // ********** TASK **********
+  /*
+    implement interface method 'ExternalPaymentProcessingAdapter.chargeCard()'
+    - the method should be 'public'
+    - the method should create a variable 'stripeCreditCard' whose type
+      is 'StripeCreditCard' and initialize it using the internal
+      method 'buildStripeCreditCard()'
+    - the method should call 'this.stripeMock.charge()' method, and store
+      the result in a variable 'stripeChargeResponse' whose type is
+      'StripeChargeResponse'
+    - in case 'stripeChargeResponse.status' is not equal to
+      'STRIPE_RESPONSE_STATUS_E.STRIPE_RESPONSE_STATUS_OK', the method
+      should throw an error with message: "Error returned from Stripe!"
+    - the method should return 'stripeChargeResponse.stripePaymentId
+  */
 
-    // build the credit card structure expected by Stripe
+  // ********** TASK **********
+  /*
+    implement interface method 'ExternalPaymentProcessingAdapter.refund()'
+    - the method should be 'public'
+    - the method should call 'this.stripeMock.charge()' method, and store
+      the result in a variable 'stripeRefundResponse' whose type
+      is 'StripeRefundResponse'
+    - in case 'stripeRefundResponse.status' is not equal to
+      'STRIPE_RESPONSE_STATUS_E.STRIPE_RESPONSE_STATUS_OK', the method
+      should throw an error with message: "Error returned from Stripe!"
+  */
+
+  // internal methods
+  
+  private buildStripeCreditCard(creditCard: CreditCard): StripeCreditCard {
     const creditCardDetails: CreditCardDetails =
       creditCard.getCreditCardDetails();
     const stripeCreditCard: StripeCreditCard = {
@@ -31,26 +56,6 @@ export default class StripeAPI implements ExternalPaymentProcessingAdapter {
       creditCardExpirationMonth: creditCardDetails.creditCardExpirationMonth,
       creditCardValidationCode: creditCardDetails.creditCardValidationCode,
     }
-    const stripeChargeResponse: StripeChargeResponse =
-      this.stripeMock.charge(payable.getRate(), payable.getCurrencyCode(),
-        stripeCreditCard);
-
-    // if Stripe returned an error
-    if (stripeChargeResponse.status !== STRIPE_RESPONSE_STATUS_E.STRIPE_RESPONSE_STATUS_OK) {
-      throw new StripeApiError("Error returned from Stripe!");
-    }
-
-    return stripeChargeResponse.stripePaymentId;
-  }
-
-  // this method sends a refund command to the external payment provider
-  public refund(externalPaymentId: string): void {
-    const stripeRefundResponse: StripeRefundResponse =
-      this.stripeMock.refund(externalPaymentId);
-
-    // if Stripe returned an error
-    if (stripeRefundResponse.status !== STRIPE_RESPONSE_STATUS_E.STRIPE_RESPONSE_STATUS_OK) {
-      throw new StripeApiError("Error returned from Stripe!");
-    }
+    return stripeCreditCard;
   }
 }

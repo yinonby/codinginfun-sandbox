@@ -14,12 +14,12 @@ export default class Book extends Product {
     return this.bookName;
   }
 
-  public getRate(): number {
-    return this.bookPrice;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getRate' - return private
+  // property 'bookPrice'
 
-  public getCurrencyCode(): string {
-    return this.currencyCode;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getCurrencyCode' - return private
+  // property 'currencyCode'
 
 }

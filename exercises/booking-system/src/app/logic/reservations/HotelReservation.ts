@@ -7,36 +7,35 @@ export default class HotelReservation extends DateRangeReservation {
     customer: Customer,
     private readonly startDate: string,
     private readonly endDate: string,
-    private readonly rate: number,
+    private readonly totalRate: number,
     private readonly currencyCode: string,
     private readonly hotelName: string) {
 
     super(reservationId, customer);
   }
 
-  public getRate(): number {
-    return this.rate;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getRate' - return private
+  // property 'totalRate'
 
-  public getCurrencyCode(): string {
-    return this.currencyCode;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getCurrencyCode' - return private
+  // property 'currencyCode'
 
-  public getStartDate(): string {
-    return this.startDate;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getStartDate' - return private
+  // property 'startDate'
 
-  public getEndDate(): string {
-    return this.endDate;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getEndDate' - return private
+  // property 'endDate'
 
   public getHotelName(): string {
     return this.hotelName;
   }
 
-  public getReservationSummary(): string {
-    return "Hotel: " + this.hotelName +
-      ", check-in: " + this.getStartDate() +
-      ", check-out: " + this.getEndDate();
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getReservationSummary' - return a string
+  // in the following format:
+  // "Hotel: <<hotelName>>, check-in: <<startDate>>, check-out: <<endDate>>"
 }

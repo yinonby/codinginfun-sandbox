@@ -47,14 +47,8 @@ export default class PaymentManager implements PaymentOperationsProvider {
       const externalPaymentId: string =
         this.primaryExternalPaymentProcessingAdapter.chargeCard(
           customer, payable, paymentMethod);
-      const paymentId: string = Utils.generateUniqueId();
-      const paymentDetails: PaymentDetails = {
-        paymentProcessingServiceName:
-          this.primaryExternalPaymentProcessingServiceName,
-        externalPaymentId: externalPaymentId,
-        isCanceled: false,
-      }
-      this.paymentDetailsMap.set(paymentId, paymentDetails);
+
+      const paymentId: string = this.storePaymentDetails(externalPaymentId);
       return paymentId;
     } else {
       throw new PaymentManagerError("Unsupported payment method: " + typeof paymentMethod);
@@ -66,7 +60,7 @@ export default class PaymentManager implements PaymentOperationsProvider {
   // an error is thrown
   public cancelPayment(paymentId: string): void {
     const paymentDetails: PaymentDetails | undefined =
-      this.paymentDetailsMap.get(paymentId);
+      this.findPaymentDetails(paymentId);
     if (! paymentDetails) {
       throw new PaymentManagerError("Payment not found, paymentId: " + paymentId);
     }
@@ -85,11 +79,37 @@ export default class PaymentManager implements PaymentOperationsProvider {
     externalPaymentProcessingAdapter.refund(paymentDetails.externalPaymentId);
 
     // update payment status
+    this.updatePaymentStatusToCanceled(paymentId);
+  }
+
+  // private methods
+
+  private storePaymentDetails(externalPaymentId: string): string {
+    const paymentId: string = Utils.generateUniqueId();
+    const paymentDetails: PaymentDetails = {
+      paymentProcessingServiceName:
+        this.primaryExternalPaymentProcessingServiceName,
+      externalPaymentId: externalPaymentId,
+      isCanceled: false,
+    }
+    this.paymentDetailsMap.set(paymentId, paymentDetails);
+
+    return paymentId;
+  }
+
+  private updatePaymentStatusToCanceled(paymentId: string): void {
+    const paymentDetails: PaymentDetails | undefined =
+      this.findPaymentDetails(paymentId);
+    if (! paymentDetails) {
+      throw new PaymentManagerError("Payment not found, paymentId: " + paymentId);
+    }
     paymentDetails.isCanceled = true;
     this.paymentDetailsMap.set(paymentId, paymentDetails);
   }
 
-  // private methods
+  private findPaymentDetails(paymentId: string): PaymentDetails | undefined {
+    return this.paymentDetailsMap.get(paymentId);
+  }
 
   private findExternalPaymentProcessingAdapter(paymentProcessingServiceName: string): ExternalPaymentProcessingAdapter | null {
     for (const externalPaymentProcessingAdapter of this.externalPaymentProcessingAdapters) {

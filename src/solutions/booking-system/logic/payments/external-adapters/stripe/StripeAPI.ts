@@ -23,14 +23,9 @@ export default class StripeAPI implements ExternalPaymentProcessingAdapter {
     creditCard: CreditCard): string {
 
     // build the credit card structure expected by Stripe
-    const creditCardDetails: CreditCardDetails =
-      creditCard.getCreditCardDetails();
-    const stripeCreditCard: StripeCreditCard = {
-      creditCardNumber: creditCardDetails.creditCardNumber,
-      creditCardExpirationDay: creditCardDetails.creditCardExpirationDay,
-      creditCardExpirationMonth: creditCardDetails.creditCardExpirationMonth,
-      creditCardValidationCode: creditCardDetails.creditCardValidationCode,
-    }
+    const stripeCreditCard: StripeCreditCard =
+      this.buildStripeCreditCard(creditCard);
+
     const stripeChargeResponse: StripeChargeResponse =
       this.stripeMock.charge(payable.getRate(), payable.getCurrencyCode(),
         stripeCreditCard);
@@ -52,5 +47,19 @@ export default class StripeAPI implements ExternalPaymentProcessingAdapter {
     if (stripeRefundResponse.status !== STRIPE_RESPONSE_STATUS_E.STRIPE_RESPONSE_STATUS_OK) {
       throw new StripeApiError("Error returned from Stripe!");
     }
+  }
+
+  // internal methods
+  
+  private buildStripeCreditCard(creditCard: CreditCard): StripeCreditCard {
+    const creditCardDetails: CreditCardDetails =
+      creditCard.getCreditCardDetails();
+    const stripeCreditCard: StripeCreditCard = {
+      creditCardNumber: creditCardDetails.creditCardNumber,
+      creditCardExpirationDay: creditCardDetails.creditCardExpirationDay,
+      creditCardExpirationMonth: creditCardDetails.creditCardExpirationMonth,
+      creditCardValidationCode: creditCardDetails.creditCardValidationCode,
+    }
+    return stripeCreditCard;
   }
 }

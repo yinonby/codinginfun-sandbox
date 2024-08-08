@@ -13,24 +13,24 @@ export default class ActivityReservation extends FixedDateReservation {
     super(reservationId, customer);
   }
 
-  public getFixedDate(): string {
-    return this.activityDate;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getFixedDate' - return private
+  // property 'activityDate'
 
-  public getRate(): number {
-    return this.activityRate;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getRate' - return private
+  // property 'activityRate'
 
-  public getCurrencyCode(): string {
-    return this.currencyCode;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getCurrencyCode' - return private
+  // property 'currencyCode'
 
   public getActivityName(): string {
     return this.activityName;
   }
 
-  public getReservationSummary(): string {
-    return "Activity: " + this.getActivityName() +
-      " on " + this.getFixedDate();
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getReservationSummary' - return a string
+  // in the following format:
+  // "Activity: <<activityName>> on <<activityDate>>"
 }

@@ -3,6 +3,7 @@ import Customer from "../persons/Customer";
 
 export default abstract class Reservation implements Payable {
   private paymentId: string = "";
+  private _isCanceled: boolean = false;
 
   constructor(
     private readonly reservationId: string,
@@ -23,6 +24,14 @@ export default abstract class Reservation implements Payable {
 
   public setPaymentId(paymentId: string): void {
     this.paymentId = paymentId;
+  }
+
+  public isCanceled(): boolean {
+    return this._isCanceled;
+  }
+
+  public cancel(): void {
+    this._isCanceled = true;
   }
 
   public abstract getRate(): number;

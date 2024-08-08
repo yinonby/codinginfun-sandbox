@@ -9,5 +9,6 @@ export default abstract class FixedDateReservation extends Reservation {
     super(reservationId, customer);
   }
 
-  public abstract getFixedDate(): string;
+  // ********** TASK **********
+  // declare an abstract method 'getFixedDate' with a return-type 'string'
 }

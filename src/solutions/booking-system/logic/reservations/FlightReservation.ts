@@ -15,11 +15,11 @@ export default class FlightReservation extends FixedDateReservation {
   }
 
   public getFixedDate(): string {
-    // in a real flight reservation, where more than a single flight
-    // segment can be found, we would go over the flight segments,
-    // and return the date of the first flight in the sequence
     return this.flightDate;
   }
+  // Note: in a real flight reservation, where more than a single flight
+  // segment can be found, we would go over the flight segments,
+  // and return the date of the first flight in the sequence
 
   public getRate(): number {
     return this.flightRate;

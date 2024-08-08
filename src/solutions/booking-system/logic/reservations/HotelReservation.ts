@@ -7,7 +7,7 @@ export default class HotelReservation extends DateRangeReservation {
     customer: Customer,
     private readonly startDate: string,
     private readonly endDate: string,
-    private readonly rate: number,
+    private readonly totalRate: number,
     private readonly currencyCode: string,
     private readonly hotelName: string) {
 
@@ -15,7 +15,7 @@ export default class HotelReservation extends DateRangeReservation {
   }
 
   public getRate(): number {
-    return this.rate;
+    return this.totalRate;
   }
 
   public getCurrencyCode(): string {

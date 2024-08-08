@@ -14,20 +14,21 @@ export default class FlightReservation extends FixedDateReservation {
     super(reservationId, customer);
   }
 
-  public getFixedDate(): string {
-    // in a real flight reservation, where more than a single flight
-    // segment can be found, we would go over the flight segments,
-    // and return the date of the first flight in the sequence
-    return this.flightDate;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getFixedDate' - return private
+  // property 'flightDate'
 
-  public getRate(): number {
-    return this.flightRate;
-  }
+  // Note: in a real flight reservation, where more than a single flight
+  // segment can be found, we would go over the flight segments,
+  // and return the date of the first flight in the sequence
 
-  public getCurrencyCode(): string {
-    return this.currencyCode;
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getRate' - return private
+  // property 'flightRate'
+
+  // ********** TASK **********
+  // implement public abstract method 'getCurrencyCode' - return private
+  // property 'currencyCode'
 
   public getOriginAirportCode(): string {
     return this.originAirportCode;
@@ -37,9 +38,8 @@ export default class FlightReservation extends FixedDateReservation {
     return this.destinationAirportCode;
   }
 
-  public getReservationSummary(): string {
-    return "Flight from " + this.getOriginAirportCode() +
-      " to " + this.getDestinationAirportCode() +
-      ", on " + this.getFixedDate();
-  }
+  // ********** TASK **********
+  // implement public abstract method 'getReservationSummary' - return a string
+  // in the following format:
+  // "Flight from <<originAirportCode>> to <<destinationAirportCode>> on <<flightDate>>"
 }

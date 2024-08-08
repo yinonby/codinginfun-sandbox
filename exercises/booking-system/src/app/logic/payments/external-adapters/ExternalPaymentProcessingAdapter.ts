@@ -1,10 +1,17 @@
-import Person from "../../persons/person";
-import Payable from "../Payable";
-import { CreditCard } from "../PaymentMethod";
 
 export default interface ExternalPaymentProcessingAdapter {
   getPaymentProcessingServiceName(): string;
-  chargeCard(person: Person, payable: Payable,
-    creditCard: CreditCard): string;
-  refund(externalPaymentId: string): void;
+
+  // ********** TASK **********
+  /*
+    declare an interface method 'chargeCard' with arguments:
+    - 'person' whose type is 'Person'
+    - 'payable' whose type is 'Payable'
+    - 'creditCard' whose type is 'CreditCard'
+    and a return-type 'string'
+  */
+
+  // ********** TASK **********
+  // declare an interface method 'refund' with an argument 'externalPaymentId'
+  // whose type is 'string', and return-type 'void'
 }

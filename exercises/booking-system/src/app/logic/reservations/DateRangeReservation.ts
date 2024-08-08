@@ -9,6 +9,9 @@ export default abstract class DateRangeReservation extends Reservation {
     super(reservationId, customer);
   }
 
-  public abstract getStartDate(): string;
-  public abstract getEndDate(): string;
+  // ********** TASK **********
+  // declare an abstract method 'getStartDate' with a return-type 'string'
+
+  // ********** TASK **********
+  // declare an abstract method 'getEndDate' with a return-type 'string'
 }
