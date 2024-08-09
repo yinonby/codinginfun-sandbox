@@ -83,4 +83,4 @@ comicCon.register("Monica", "Hunter", "Batman", HUNTER_FAMILY_CREDIT_CARD);
 comicCon.register("Rob", "Hunter", "Superman", HUNTER_FAMILY_CREDIT_CARD);
 
 /* do not change anything below this line */
-export { comicCon };
+export { ComicCon, comicCon };
