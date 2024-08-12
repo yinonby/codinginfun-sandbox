@@ -14,7 +14,7 @@ export default abstract class Reservation implements Payable {
     return this.reservationId;
   }
 
-  public getcustomer(): Customer {
+  public getCustomer(): Customer {
     return this.customer;
   }
 
